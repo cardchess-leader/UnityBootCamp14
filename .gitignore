@@ -73,3 +73,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# assets ignore
+/[Aa]ssets/Mini Simple Characters Skeleton Demo
+/[Aa]ssets/Unity Technologies
