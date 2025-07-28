@@ -108,4 +108,3 @@ UnityBootCamp14 Projects
 ## 🧑‍🏫 제작
 
 - UnityBootCamp14 실습 자료  
-- Instructor: *(당신의 이름을 여기에 입력하세요)*  
