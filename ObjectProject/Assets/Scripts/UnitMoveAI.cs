@@ -4,6 +4,7 @@ using UnityEngine;
 public class UnitMoveAI : MonoBehaviour
 {
     public float speed = 1.0f; // Speed of the unit
+    public float rotationSpeed = 5.0f; // Speed of rotation towards the player
     public float detection = 5.0f; // Detection range for the unit
     Coroutine moveCoroutine;
     Transform playerPos;
@@ -35,6 +36,9 @@ public class UnitMoveAI : MonoBehaviour
             {
                 Vector3 direction = (playerPos.position - transform.position).normalized; // 방향 벡터를 계산
                 transform.position = Vector3.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime); // 플레이어 방향으로 이동
+                // 플레이어를 향해 바라보도록 회전 (추가로 y축 기준 90도 회전)
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, (lookRotation), Time.deltaTime * rotationSpeed);
             }
             yield return null; // 다음 프레임까지 대기
         }

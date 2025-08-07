@@ -1,6 +1,7 @@
 using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
+    static int deathCount = 0;
     public int maxHealth = 100; // Maximum health of the enemy
     private int currentHealth; // Current health of the enemy
 
@@ -8,12 +9,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        maxHealth = 100 + (deathCount / 10) * 100;
         currentHealth = maxHealth; // Reset current health when the enemy is enabled
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage; // Reduce current health by damage amount
+        Debug.Log("HP: " + currentHealth + " / " + maxHealth); // Log current health
         if (currentHealth <= 0)
         {
             Die(); // Call Die method if health is zero or below
@@ -27,6 +30,7 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
+        deathCount++; // Increment the death count
         this.pool.ReturnEnemy(gameObject); // Return the enemy to the pool
 
         var scoreController = FindFirstObjectByType<ScoreController>();

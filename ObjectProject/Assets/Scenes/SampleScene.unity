@@ -154,8 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 537808389}
   firePoint: {fileID: 1644180202}
-  fireRate: 0.1
-  time: 0
   aimRay: {fileID: 2067346594}
 --- !u!136 &197300179
 CapsuleCollider:
@@ -242,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 197300177}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -0.29, y: 1, z: -13.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -850,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 30
-  interval: 10
+  interval: 2
   enemyPrefab: {fileID: 8124408481972290152, guid: a4e43740563016645a13958c0f267dff, type: 3}
   spawnPoint: {fileID: 1975320250}
 --- !u!1 &537808387

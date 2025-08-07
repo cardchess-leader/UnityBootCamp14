@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,7 +22,14 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(-moveVertical, 0.0f, moveHorizontal);
-        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.Self);
+        //transform.Translate(movement * moveSpeed * Time.deltaTime, Space.Self);
+        // convert movement to world space
+        Vector3 worldMovement = transform.TransformDirection(movement);
+        worldMovement.y = 0; // Prevent vertical movement
+        // normalize the movement vector to ensure consistent speed
+        worldMovement.Normalize();
+        // Move the player
+        transform.position += worldMovement * moveSpeed * Time.deltaTime;
 
         var currMousePos = Input.mousePosition;
         transform.Rotate(0, (currMousePos.x - lastMousePos.x) * rotSpeed, 0);
@@ -39,7 +47,7 @@ public class PlayerController : MonoBehaviour
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.TakeDamage(100); // Example damage value
+                enemy.TakeDamage(int.MaxValue); // Example damage value
             }
             TakeDamage(10);
         }

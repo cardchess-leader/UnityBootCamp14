@@ -9,22 +9,14 @@ public class Fire : MonoBehaviour
     // 총알 발사 지점
     public Transform firePoint;
 
-    // 총알 발사 속도
-    public float fireRate = 0.1f;
-    public float time = 0;
-
     public GameObject aimRay;
 
     private void Update()
     {
-        time += Time.deltaTime;
-        //if (time < fireRate)
-        //    return; // 발사 속도 제한
-        if (Input.GetKey(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             var bullet = pool.GetBullet();
             bullet.transform.position = firePoint.position; // 총알 위치 설정
             bullet.transform.rotation = firePoint.rotation; // 총알 회전 설정
-            time = 0; // 시간 초기화
         }
 
         // Aim ray visibility with Shift key
