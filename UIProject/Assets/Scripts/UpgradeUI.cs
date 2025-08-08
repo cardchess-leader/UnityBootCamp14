@@ -11,6 +11,7 @@ public class UpgradeUI : MonoBehaviour
     public Text message1;
     public Text message2;
     public Text message3;
+    public Text message4;
     public Text iconText;
     public GameObject messagePanel;
 
@@ -22,7 +23,7 @@ public class UpgradeUI : MonoBehaviour
         {
             // 업그레이드 성공 시 UI 업데이트
             UpdateUI();
-            StartCoroutine(ShowMessageCoroutine("강화 성공", 1));
+            StartCoroutine(ShowMessageCoroutine("강화 성공", 5));
         }
         else
         {
@@ -44,6 +45,7 @@ public class UpgradeUI : MonoBehaviour
         iconText.text = $"마법사 + {unitStat.currUpgrade}";
         message1.text = (unitStat.isMaxUpgrade ? "" : "강화 재료\n") + unitStat.upgradeRequirement;
         message2.text = $"인벤토리:\n" + $"{unitStat.inventory.gold}골드\n" + string.Join('\n', unitStat.inventory.inventoryItems);
+        message4.text = $"현재 능력치: \n{unitStat.wizardStat}";
     }
 
     private void Start()
