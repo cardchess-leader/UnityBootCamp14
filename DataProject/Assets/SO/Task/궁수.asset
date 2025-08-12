@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presetName: "\uAD81\uC218"
   playerData:
+    className: "\uAD81\uC218"
     str: 5
     dex: 10
     intl: 1
     luk: 1
+  image: {fileID: 21300000, guid: 331be4bcf4a58d943a3258953078c1e1, type: 3}

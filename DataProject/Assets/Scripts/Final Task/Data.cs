@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 using UnityEngine;
-using static JsonMaker;
 
 [Serializable]
 public class PlayerData
 {
+    public string className;
     public int str;
     public int dex;
     public int intl;
@@ -36,19 +36,23 @@ public class Data : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadData();
+        playerData = LoadData();
+        if (playerData == null)
+        {
+            UI.Instance.DisableContinueBtn();
+        }
     }
 
-    void LoadData()
+    public PlayerData LoadData()
     {
         if (File.Exists(SaveFilePath))
         {
             string json = File.ReadAllText(SaveFilePath);
-            playerData = JsonUtility.FromJson<PlayerData>(json);
+            return JsonUtility.FromJson<PlayerData>(json);
         }
         else
         {
-            UI.Instance.DisableContinueBtn();
+            return null;
         }
     }
 
@@ -58,5 +62,15 @@ public class Data : MonoBehaviour
         File.WriteAllText(SaveFilePath, json);
         // Move to next Scene
         UI.Instance.ContinueGame();
+    }
+
+    public void ClearData()
+    {
+        if (File.Exists(SaveFilePath))
+        {
+            File.Delete(SaveFilePath);
+        }
+        playerData = null;
+        UI.Instance.DisableContinueBtn();
     }
 }
