@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance = null;
     private int score = 0;
     private int bestScore = 0;
+    private bool isGameRunning = true;
 
     // Add an event for stage clear
     public UnityEvent OnStageClear;
@@ -39,7 +40,7 @@ public class ScoreManager : MonoBehaviour
     private void Update()
     {
         // 게임 오버 패널 또는 스테이지 클리어 패널이 활성화된 경우, R 키를 눌러 게임을 재시작할 수 있습니다.
-        if (gameOverPanel.activeSelf || stageClearPanel.activeSelf)
+        if (!isGameRunning)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -50,12 +51,16 @@ public class ScoreManager : MonoBehaviour
 
     private void StageClear()
     {
+        if (!isGameRunning) return;
         stageClearPanel.SetActive(true); // 스테이지 클리어 패널 활성화
+        isGameRunning = false; // 게임 상태를 비활성화로 변경
     }
 
     public void GameOver()
     {
+        if (!isGameRunning) return;
         gameOverPanel.SetActive(true); // 게임 오버 패널 활성화
+        isGameRunning = false; // 게임 상태를 비활성화로 변경
     }
 
     public void AddScore(int value)
