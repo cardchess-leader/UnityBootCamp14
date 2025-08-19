@@ -11,12 +11,15 @@ public class Enemy : MonoBehaviour
     }
     public float speed = 5f; // 적의 이동 속도
     public EnemyType enemyType; // 적의 종류
+    public int score = 5; // 적을 처치했을 때 주어지는 점수
     Vector3 dir;
+
+    public GameObject explosionPrefab;
 
     // 적의 패턴
     void Start()
     {
-        PatternSetting(); // 패턴 설정 메소드 호출 
+        PatternSetting(); // 패턴 설정 메소드 호출
     }
 
     private void PatternSetting()
@@ -42,14 +45,13 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // 충돌한 오브젝트의 태그가 "Player"인 경우
+        ScoreManager.Instance.AddScore(score); // 점수 추가
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity); // 폭발 이펙트 생성
+        collision.gameObject.SetActive(false); // 충돌한 오브젝트 비활성화
+        gameObject.SetActive(false); // 자신(enemy) 게임오브젝트 비활성화
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject); // 플레이어 오브젝트 제거
-            Destroy(gameObject); // 적 오브젝트 제거
-        } else
-        {
-            Destroy(gameObject);
+            ScoreManager.Instance.GameOver(); // 플레이어와 충돌 시 게임 오버 처리
         }
     }
 }

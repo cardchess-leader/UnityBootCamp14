@@ -15,8 +15,14 @@ public class PlayerFire : MonoBehaviour
             // 총알은 총알 생산 공장에서 등록한 총알을 생성한다.
             // 총알의 위치는 총구 지점으로 설정된다.
             // 별도의 회전은 하지 않는다.
-            var bullet = Instantiate(bulletFactory, firePosition.transform.position, Quaternion.identity);
+            //var bullet = Instantiate(bulletFactory, firePosition.transform.position, Quaternion.identity);
 
+            var bullet = BulletPool.Instance?.GetBullet();
+            if (bullet != null)
+            {
+                bullet.transform.position = firePosition.transform.position; // 총구 위치로 설정
+                bullet.transform.rotation = Quaternion.identity; // 회전은 하지 않음
+            }
         }
     }
 }

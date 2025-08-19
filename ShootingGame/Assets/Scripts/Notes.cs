@@ -52,3 +52,16 @@
 // 정렬 레이어(Sorting Layer)
 // 2D 게임에서 오브젝트의 렌더링 순서를 제어합니다.
 // 정렬 레이어는 렌더링 순서를 결정하는데 사용되며, 각 오브젝트는 하나의 정렬 레이어에 속합니다.
+
+// 테그(tag) : 오브젝트에 대한 식별 용도
+// 트리거, 물리 충돌에 대한 비교
+// 테그 비교 사용법: 
+// if (other.CompareTag("Player")) { ... } 여기서 other는 Collider 타입입니다. CompareTag는 다음과 같은 클래스에서 제공합니다:
+// Collider, Rigidbody, GameObject 등에서 사용할 수 있습니다.
+
+// 사용하던 shader 파일이 프로젝트 내에서 삭제된 경우
+// 현재 플랫폼 기준에 맞지 않는 shader를 사용했을 경우 (Legacy Shader를 URP 환경에서 사용한다)
+// 다운받은 에셋에서 shader가 빠져있는 경우
+// Custom Shader를 쓰는 에셋인 경우
+// 해결 방법: Edit -> Rendering -> Convert URP를 통해 URP로 전환합니다. (전체 자동 변경 방법. 단 안되는 경우도 있어서 수동으로 변경해야 하는 경우도 있습니다.)
+

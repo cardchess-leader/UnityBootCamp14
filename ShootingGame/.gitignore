@@ -75,4 +75,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # assets ignore
-/[Aa]ssets/TextMesh Pro/
+/[Aa]ssets/CustomAssets/

@@ -12,9 +12,16 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject spawnArea;
 
+
     private void Start()
     {
-        coolTime = Random.Range(min, max);
+        coolTime = Random.Range(min, max) * coolTime;
+        ScoreManager.Instance.OnStageClear.AddListener(DisableEnemyManager);
+    }
+
+    void DisableEnemyManager() // 스테이지 클리어 시 적 생성 중지
+    {
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -23,7 +30,7 @@ public class EnemyManager : MonoBehaviour
 
         if (timeSinceLastSpawn >= coolTime)
         {
-            var enemy = Instantiate(enemyPrefab, spawnArea.transform.position, Quaternion.identity);
+            var enemy = Instantiate(enemyPrefab, spawnArea.transform.position, enemyPrefab.transform.rotation);
             timeSinceLastSpawn = 0; // 쿨타임 초기화
             coolTime = Random.Range(min, max); // 다음 소환 시간 간격을 랜덤으로 설정
         }
