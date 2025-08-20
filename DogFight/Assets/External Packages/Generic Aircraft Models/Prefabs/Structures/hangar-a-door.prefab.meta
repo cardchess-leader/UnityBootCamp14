@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b23d73c4c8ede434eaa537c8e39f57f6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302789
+  packageName: Generic Aircraft Models
+  packageVersion: 1.0
+  assetPath: Assets/Generic Aircraft Models/Prefabs/Structures/hangar-a-door.prefab
+  uploadId: 709456
