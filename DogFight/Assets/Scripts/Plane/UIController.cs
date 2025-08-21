@@ -5,6 +5,8 @@ public class UIController : MonoBehaviour
 {
     [SerializeField]
     TMP_Text speedText;
+    [SerializeField]
+    TMP_Text altitudeText;
     // Make this singleton so that it can be accessed from other scripts
     public static UIController Instance { get; private set; }
     private void Awake()
@@ -23,15 +25,16 @@ public class UIController : MonoBehaviour
     void Start()
     {
         UpdateSpeedText();
+        UpdateAltitudeText();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void UpdateSpeedText(float speed = 0f)
     {
         speedText.text = $"Speed: {speed:F2} m/s"; // Update the speed text with the current speed
+    }
+
+    public void UpdateAltitudeText(float altitude = 0f)
+    {
+        altitudeText.text = $"Altitude: {altitude:F2} m"; // Update the speed text with the current speed
     }
 }
