@@ -158,7 +158,7 @@ MonoBehaviour:
   maxThrustPower: 5000
   liftPower: 2000
   accelerationTime: 5
-  liftOffTiming: 3
+  liftOffTiming: 2
   maxSpeed: 1000
   forward: {fileID: 8520235054111697275}
   liftComponent: {fileID: 237271503222815431}

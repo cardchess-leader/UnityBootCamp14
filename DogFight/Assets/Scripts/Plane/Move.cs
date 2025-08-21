@@ -13,15 +13,11 @@ public class Move : MonoBehaviour
     [SerializeField]
     float maxThrustPower = 5000;
     [SerializeField]
-    float liftPower = 2000; // Lift power applied when the plane is moving fast enough to lift off
-    [SerializeField]
     float accelerationTime = 5f; // Time in seconds to reach max thrust power
     [SerializeField]
     float liftOffTiming = 5f; // Lift off after this many seconds
     [SerializeField]
     float maxSpeed = 100f; // Maximum speed of the plane
-    [SerializeField]
-    GameObject forward;
     // Rigidbody component to apply physics forces
     Rigidbody rb;
     [SerializeField]
@@ -37,7 +33,7 @@ public class Move : MonoBehaviour
     private void Update()
     {
         float thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
-        rb.AddForce(forward.transform.forward * thrustPower * Time.deltaTime, ForceMode.Acceleration); // Apply forward force to the plane
+        rb.AddForce(transform.forward * thrustPower * Time.deltaTime, ForceMode.Acceleration); // Apply forward force to the plane
         timeSinceStart += Time.deltaTime; // Increment the timer
     }
 
