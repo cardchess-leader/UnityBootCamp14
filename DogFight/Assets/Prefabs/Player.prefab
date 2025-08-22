@@ -255,8 +255,9 @@ MonoBehaviour:
   initThrustPower: 1000
   maxThrustPower: 5000
   accelerationTime: 5
-  liftOffTiming: 5
+  liftOffTiming: 3
   maxSpeed: 100
+  rotationSpeed: 5
   liftComponent: {fileID: 7726085767386797928}
 --- !u!114 &7726085767386797928
 MonoBehaviour:
@@ -270,7 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6222f971eb58e4d48b436de98184bb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftForce: 10
+  liftForce: 100
+  gravityScale: 490
 --- !u!1 &4878736161738910752
 GameObject:
   m_ObjectHideFlags: 0

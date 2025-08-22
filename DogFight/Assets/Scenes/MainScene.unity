@@ -1049,7 +1049,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liftUpBelowThisAltitude: 50
-  liftDownBelowThisAltitude: 100
 --- !u!1001 &1724693777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1231,20 +1230,28 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 58208724724287019, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: rotationSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 58208724724287019, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: maxThrustPower
-      value: 5000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 58208724724287019, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: initThrustPower
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 974960293394086953, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_Drag
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 974960293394086953, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974960293394086953, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: m_AngularDrag
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2465234584410814289, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_Name
@@ -1300,7 +1307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7726085767386797928, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: liftForce
-      value: 800
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7726085767386797928, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_Enabled

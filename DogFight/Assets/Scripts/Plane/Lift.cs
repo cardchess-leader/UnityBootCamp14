@@ -6,7 +6,8 @@ public class Lift : MonoBehaviour
     [SerializeField]
     float liftForce = 10; // Force applied for lift
     Rigidbody rb;
-    public float gravityScale = 490f;
+    [SerializeField]
+    float counterGravityForce = 0.9f; // in sacle of 0 ~ 1.0
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -19,20 +20,14 @@ public class Lift : MonoBehaviour
 
     void ApplyZoneLift()
     {
-        var direction = new Vector3(0, 0, 0);
-        var magnitude = liftForce;
+        var liftDirection = new Vector3(0, 1, 0);
         if (transform.position.y < GameManager.Instance.liftUpBelowThisAltitude)
         {
-            direction = new Vector3(0, 1, 0);
-        }
-        else if (transform.position.y > GameManager.Instance.liftDownBelowThisAltitude)
-        {
-            direction = new Vector3(0, -1, 0);
+            rb.AddForce(liftDirection * liftForce * Time.deltaTime, ForceMode.Force);
         } else
         {
-            direction = new Vector3(0, 1, 0);
-            magnitude = gravityScale;
+            // Add default gravityscale to offset the gravity effect (by that much fraction)
+            rb.AddForce(liftDirection * counterGravityForce, ForceMode.Force);
         }
-        rb.AddForce(direction * magnitude * Time.deltaTime, ForceMode.Force);
     }
 }
