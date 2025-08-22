@@ -38,11 +38,6 @@ public class Move : MonoBehaviour
         StartCoroutine(EnableControlCoroutine());
     }
 
-    private void Update()
-    {
-        // This can be left empty or used for non-physics related updates
-    }
-
     private void FixedUpdate()
     {
         // Apply thrust continuously
@@ -71,22 +66,6 @@ public class Move : MonoBehaviour
 
         // Apply torque to rotate the plane
         rb.AddRelativeTorque(rotationInput * rotationSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-
-        // Apply visual rotation for the plane's model (Z-axis rotation)
-        if (horizontalInput != 0)
-        {
-            float sidewaysAngularVelocity = Vector3.Dot(rb.angularVelocity, transform.up);
-            rb.AddRelativeTorque(new Vector3(0, 0, -sidewaysAngularVelocity * visualRotationSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
-        } 
-        else
-        {
-            // Return to original (z-axis) rotation to zero gradually
-            float currentZRotation = transform.eulerAngles.z;
-            float targetZRotation = 0f; // Target rotation angle
-            //Debug.Log("Mathf.Abs(currentZRotation - targetZRotation): " + Mathf.Delta(currentZRotation - targetZRotation));
-            float zRotationDelta = Mathf.MoveTowardsAngle(currentZRotation, targetZRotation, rotationReturnConstant * Mathf.Abs(Mathf.DeltaAngle(currentZRotation, targetZRotation)) / 4 * Time.fixedDeltaTime);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zRotationDelta);
-        }
     }
 
     private void UpdateUI()
@@ -104,7 +83,7 @@ public class Move : MonoBehaviour
     IEnumerator EnableControlCoroutine()
     {
         yield return new WaitForSeconds(liftOffTiming); // Wait for the specified lift off timing
-        
+
         // Enable player control & Start lifting
         canControl = true;
         liftComponent.enabled = true;
@@ -119,7 +98,10 @@ public class Move : MonoBehaviour
     }
 }
 
-
 // 1. The initial launch of the airplane is all fixed by scripts. No user control until the end of the initial launch.
 // 2. There is a lift (upward force) when the airplane is below specific altitude. 
 // 3. The airplane will descend (downward force) when the airplane is above specific altitude.
+// 4. The airplane's model shows z-axis tilt rotation when moving left/right.
+// 5. The view should also change based on the user mouse position. (The center of the screen is the center of the view)
+
+// The x-axis sideways rotation is only applied to the model itself, not the parent rigidbody.

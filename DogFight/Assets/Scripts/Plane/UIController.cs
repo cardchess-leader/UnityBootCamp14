@@ -27,12 +27,10 @@ public class UIController : MonoBehaviour
         UpdateSpeedText();
         UpdateAltitudeText();
     }
-
     public void UpdateSpeedText(float speed = 0f)
     {
         speedText.text = $"Speed: {speed:F2} m/s"; // Update the speed text with the current speed
     }
-
     public void UpdateAltitudeText(float altitude = 0f)
     {
         altitudeText.text = $"Altitude: {altitude:F2} m"; // Update the speed text with the current speed

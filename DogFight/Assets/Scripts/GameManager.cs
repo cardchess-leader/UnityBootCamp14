@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     // Use singleton pattern
     public static GameManager Instance { get; private set; }
     public float liftUpBelowThisAltitude = 50f;
-    //public float liftDownBelowThisAltitude = 75f;
 
     private void Awake()
     {
