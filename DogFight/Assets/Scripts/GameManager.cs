@@ -27,3 +27,17 @@ public class GameManager : MonoBehaviour
         return target.transform.position.y - gameObject.transform.position.y;
     }
 }
+
+// What to implement next:
+// 1. Implement auto-targeting system for missiles. (Hint: Use Physics.OverlapSphere to find nearby targets) (Snap to closes target by view angle difference between center of view and enemy)
+// 2. Add some kind of scoring system
+// 3. Add sound effects for shooting and explosions (Download assets from Unity Asset Store)
+// 4. Add background music
+// 5. Implement enemy attack behavior (e.g., enemy planes shooting at the player)
+// 6. Add Player health and Game Over conditions
+// 7. Implement a simple main menu and pause menu
+// 8. Optimize performance (e.g., object pooling for bullets and explosions)
+// 9. Add particle effects for engine trails, explosions, and gunfire
+// 10. Implement different types of weapons (e.g., machine guns, missiles) with different behaviors
+// 11. Add UI elements to display player health, score, and ammo count
+// 12. Implement level progression with increasing difficulty
