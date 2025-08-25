@@ -5,8 +5,6 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject missilePrefab;
     [SerializeField]
-    GameObject bulletPrefab;
-    [SerializeField]
     GameObject firePoint;
 
     // Update is called once per frame
@@ -18,11 +16,32 @@ public class Attack : MonoBehaviour
             GameObject missile = Instantiate(missilePrefab, firePoint.transform.position, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
             missile.GetComponent<Missile>().SetInitSpeed(GetComponent<Rigidbody>().linearVelocity.magnitude);
         }
+        
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            // Double barrel gun fire
-            Instantiate(bulletPrefab, firePoint.transform.position + new Vector3(0.5f, 0, 0.3f), transform.rotation * Quaternion.Euler(90f, 0f, 0f));
-            Instantiate(bulletPrefab, firePoint.transform.position + new Vector3(-0.5f, 0, 0.1f), transform.rotation * Quaternion.Euler(90f, 0f, 0f));
+            // Double barrel gun fire using BulletPool
+            FireBullet(firePoint.transform.position + new Vector3(0.5f, 0, 0.3f));
+            FireBullet(firePoint.transform.position + new Vector3(-0.5f, 0, 0.1f));
+        }
+    }
+
+    private void FireBullet(Vector3 position)
+    {
+        if (BulletPool.Instance != null)
+        {
+            GameObject bullet = BulletPool.Instance.GetBullet();
+            if (bullet != null)
+            {
+                bullet.transform.position = position;
+                bullet.transform.rotation = transform.rotation * Quaternion.Euler(90f, 0f, 0f);
+                
+                // Reset bullet state for reuse
+                var bulletComponent = bullet.GetComponent<Bullet>();
+                if (bulletComponent != null)
+                {
+                    bulletComponent.ResetBullet();
+                }
+            }
         }
     }
 }

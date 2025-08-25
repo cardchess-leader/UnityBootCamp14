@@ -8,11 +8,14 @@ public class Bullet : MonoBehaviour
     // Include a explosion effect on impact in the future
     [SerializeField]
     GameObject explosionEffect;
+    
+    private float lifetime = 5f;
+    private float currentLifetime;
 
-    private void Start()
+    private void OnEnable()
     {
-        // Destroy after 10 seconds to avoid clutter
-        Destroy(gameObject, 5f);
+        // Reset lifetime when bullet is reused from pool
+        currentLifetime = 0f;
     }
     void Update()
     {
