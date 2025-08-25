@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour
     TMP_Text altitudeText;
     [SerializeField]
     TMP_Text hpText;
+    [SerializeField]
+    TMP_Text ammoText;
     // Make this singleton so that it can be accessed from other scripts
     public static UIController Instance { get; private set; }
     private void Awake()
@@ -40,5 +42,9 @@ public class UIController : MonoBehaviour
     public void UpdateHpText(int hp, int maxHp)
     {
         hpText.text = $"HP: {hp} / {maxHp}";
+    }
+    public void UpdateAmmoText(int ammo, int maxAmmo)
+    {
+        ammoText.text = $"Ammo: {ammo} / {maxAmmo}";
     }
 }

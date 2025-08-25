@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7726085767386797928}
   - component: {fileID: 8113232908725773747}
   - component: {fileID: 6309366296940448462}
+  - component: {fileID: 8622041883883190801}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -323,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 2780843491148312916, guid: f24b4f697b960c54d83d1b3f268cf020, type: 3}
   firePoint: {fileID: 1350069114818109815}
+  maxAmmo: 100
 --- !u!114 &6309366296940448462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +338,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &8622041883883190801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465234584410814289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2041113251af8a4e848719a1795510f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8881102429484969337, guid: 1320e29f95c8a6c42acdae282f8902b0, type: 3}
+  poolSize: 20
+  maxPoolSize: 100
 --- !u!1 &4878736161738910752
 GameObject:
   m_ObjectHideFlags: 0
