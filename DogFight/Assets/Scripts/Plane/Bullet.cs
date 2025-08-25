@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class Missile : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     // Move forward at a accelerating speed
     [SerializeField]
-    float acceleration;
-    [SerializeField]
-    float maxSpeed;
-    float initialSpeed;
-    float currentSpeed;
+    float bulletSpeed;
     // Include a explosion effect on impact in the future
     [SerializeField]
     GameObject explosionEffect;
@@ -16,14 +12,12 @@ public class Missile : MonoBehaviour
     private void Start()
     {
         // Destroy after 10 seconds to avoid clutter
-        Destroy(gameObject, 10f);
-        currentSpeed = initialSpeed;
+        Destroy(gameObject, 5f);
     }
     void Update()
     {
         // Accelerate forward
-        transform.position += transform.up * currentSpeed * Time.deltaTime;
-        currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
+        transform.position += transform.up * bulletSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,10 +26,5 @@ public class Missile : MonoBehaviour
         Destroy(gameObject);
         // Optionally, instantiate explosion effect here
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
-    }
-
-    public void SetInitSpeed(float initialSpeed)
-    {
-        this.initialSpeed = Mathf.Min(initialSpeed + 10, maxSpeed); // Add a small boost to the initial speed
     }
 }

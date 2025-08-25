@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 6968717697919145558, guid: 4360deb2fbbd16d4e840c7314d9a568b, type: 3}
-  buildingCount: 250
+  buildingCount: 200
   startPos: {x: 56.1, y: 0, z: -5700}
   endPos: {x: 56.1, y: 0, z: 5700}
 --- !u!114 &353182824
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 6968717697919145558, guid: 4360deb2fbbd16d4e840c7314d9a568b, type: 3}
-  buildingCount: 250
+  buildingCount: 200
   startPos: {x: -66.4, y: 0, z: -5700}
   endPos: {x: -66.4, y: 0, z: 5700}
 --- !u!1001 &414510324
@@ -1438,6 +1438,10 @@ PrefabInstance:
       propertyPath: gravityScale
       value: 600
       objectReference: {fileID: 0}
+    - target: {fileID: 8113232908725773747, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 8881102429484969337, guid: 1320e29f95c8a6c42acdae282f8902b0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
