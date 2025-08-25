@@ -66,7 +66,7 @@ public class BulletPool : MonoBehaviour
     public void ReturnBullet(GameObject bullet)
     {
         bulletPool.Release(bullet);
-    }
+    }   
 
     // Pool callbacks
     private GameObject CreateBullet()
@@ -98,19 +98,31 @@ public class BulletPool : MonoBehaviour
     {
         Destroy(bullet);
     }
+
+    // Pool statistics (for debugging)
+    public int CountInactive => bulletPool.CountInactive;
+    public int CountActive => bulletPool.CountActive;
+    public int CountAll => bulletPool.CountAll;
 }
 
 // Helper component for automatic pool return
 public class PooledBullet : MonoBehaviour
 {
     public BulletPool Pool { get; set; }
+    private bool isBeingReturned = false;
+    
+    public void ReturnToPool()
+    {
+        if (Pool != null && !isBeingReturned)
+        {
+            isBeingReturned = true;
+            Pool.ReturnBullet(gameObject);
+        }
+    }
     
     private void OnDisable()
     {
-        // Automatically return to pool when disabled
-        if (Pool != null)
-        {
-            Pool.ReturnBullet(gameObject);
-        }
+        // Reset the flag when disabled
+        isBeingReturned = false;
     }
 }
