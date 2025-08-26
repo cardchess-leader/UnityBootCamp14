@@ -31,6 +31,17 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        GameManager.Instance.AddExp(10);
+    }
+
+    public void SetTargeted(bool isTargeted)
+    {
+        // Change color to indicate targeting status
+        Renderer renderer = GetComponent<Renderer>();
+        if (isTargeted)
+            renderer.material.color = Color.red;
+        else
+            renderer.material.color = Color.white;
     }
 }
 

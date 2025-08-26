@@ -11,6 +11,10 @@ public class UIController : MonoBehaviour
     TMP_Text hpText;
     [SerializeField]
     TMP_Text ammoText;
+    [SerializeField]
+    TMP_Text expText;
+    [SerializeField]
+    TMP_Text levelText;
     // Make this singleton so that it can be accessed from other scripts
     public static UIController Instance { get; private set; }
     private void Awake()
@@ -47,4 +51,15 @@ public class UIController : MonoBehaviour
     {
         ammoText.text = $"Ammo: {ammo} / {maxAmmo}";
     }
+    public void ShowReloadingText()
+    {
+        ammoText.text = "Reloading Ammo...";
+    }
+
+    public void UpdateLevelText(int level, int exp, int nextLevelExp)
+    {
+        expText.text = $"EXP: {exp} / {nextLevelExp}";
+        levelText.text = $"LEVEL: {level}";
+    }
+
 }

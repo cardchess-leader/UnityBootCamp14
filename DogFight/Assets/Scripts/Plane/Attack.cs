@@ -11,13 +11,21 @@ public class Attack : MonoBehaviour
     int maxAmmo;
     int currentAmmo;
     Coroutine reloadCoroutine;
-
+    
+    // 자동 타겟팅 참조
+    private AutoTargeting autoTargeting;
+    
     private void Start()
     {
         currentAmmo = maxAmmo;
+        autoTargeting = GetComponent<AutoTargeting>();
+        
+        if (autoTargeting == null)
+        {
+            Debug.LogWarning("AutoTargeting component not found on " + gameObject.name);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 스페이스바를 누르면 미사일 발사
@@ -26,8 +34,8 @@ public class Attack : MonoBehaviour
             // Missile requires 10 ammo
             if (currentAmmo < 10) return;
             currentAmmo -= 10;
-            GameObject missile = Instantiate(missilePrefab, firePoint.transform.position, transform.rotation * Quaternion.Euler(90f, 0f, 0f));
-            missile.GetComponent<Missile>().SetInitSpeed(GetComponent<Rigidbody>().linearVelocity.magnitude);
+            
+            FireMissile();
             UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         }
         
@@ -45,6 +53,27 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
+        }
+    }
+    
+    private void FireMissile()
+    {
+        GameObject missile = Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), transform.rotation * Quaternion.Euler(90f, 0f, 0f));
+        Missile missileComponent = missile.GetComponent<Missile>();
+        
+        if (missileComponent != null)
+        {
+            missileComponent.SetInitSpeed(GetComponent<Rigidbody>().linearVelocity.magnitude);
+            
+            // 자동 타겟팅이 활성화되어 있으면 타겟 설정
+            if (autoTargeting != null && autoTargeting.IsTargeting())
+            {
+                Enemy target = autoTargeting.GetCurrentTarget();
+                if (target != null)
+                {
+                    missileComponent.SetTarget(target);
+                }
+            }
         }
     }
 
@@ -77,10 +106,10 @@ public class Attack : MonoBehaviour
         }
     }
 
-
     // Refill all ammos after 3 seconds
     IEnumerator ReloadCoroutine()
     {
+        UIController.Instance.ShowReloadingText();
         yield return new WaitForSeconds(3f);
         currentAmmo = maxAmmo;
         UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
