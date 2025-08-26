@@ -63,7 +63,7 @@ public class Attack : MonoBehaviour
         
         if (missileComponent != null)
         {
-            missileComponent.SetInitSpeed(GetComponent<Rigidbody>().linearVelocity.magnitude);
+            missileComponent.SetInitSpeed(transform.parent.GetComponent<Rigidbody>().linearVelocity.magnitude);
             
             // 자동 타겟팅이 활성화되어 있으면 타겟 설정
             if (autoTargeting != null && autoTargeting.IsTargeting())

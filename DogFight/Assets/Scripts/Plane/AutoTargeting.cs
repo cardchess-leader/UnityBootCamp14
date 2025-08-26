@@ -8,15 +8,12 @@ public class AutoTargeting : MonoBehaviour
     [SerializeField] private float snapAngleThreshold = 30f; // 스냅할 각도 임계값 (도)
     [SerializeField] private LayerMask enemyLayerMask = -1; // 적 레이어 마스크
     
-    [Header("Cursor Settings")]
-    [SerializeField] private Texture2D crosshairTexture; // 십자 커서 텍스처
-    [SerializeField] private Vector2 cursorHotspot = new Vector2(16, 16); // 커서 핫스팟 (중앙점)
-    
     private Camera playerCamera;
     private Enemy currentTarget;
     private bool isTargeting = false;
-    private bool isCrosshairActive = false;
-    
+
+    CustomCursor customCursor;
+
     private void Start()
     {
         // 플레이어 카메라 찾기
@@ -25,18 +22,10 @@ public class AutoTargeting : MonoBehaviour
         {
             playerCamera = FindObjectOfType<Camera>();
         }
-        
-        // 기본 커서 설정 (보이지만 기본 모양)
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        
-        // 십자 커서 텍스처가 없으면 기본 생성
-        if (crosshairTexture == null)
-        {
-            CreateDefaultCrosshair();
-        }
+
+        customCursor = CustomCursor.Instance;
     }
-    
+
     private void Update()
     {
         FindAndTargetEnemies();
@@ -49,9 +38,8 @@ public class AutoTargeting : MonoBehaviour
         
         if (nearbyEnemies.Count == 0)
         {
-            // 적이 없으면 타겟 해제 및 일반 커서로 변경
+            // 적이 없으면 타겟 해제
             ClearTarget();
-            SetNormalCursor();
             return;
         }
         
@@ -70,90 +58,40 @@ public class AutoTargeting : MonoBehaviour
             if (angleDifference <= snapAngleThreshold)
             {
                 SetTarget(closestEnemy);
-                SetCrosshairCursor();
+                SnapCursorToTarget(closestEnemy);
             }
             else
             {
                 ClearTarget();
-                SetNormalCursor();
+                ReturnCursorToMouse();
             }
         }
         else
         {
             ClearTarget();
-            SetNormalCursor();
+            ReturnCursorToMouse();
         }
     }
-    
-    private void CreateDefaultCrosshair()
+
+    private void SnapCursorToTarget(Enemy enemy)
     {
-        // 32x32 픽셀의 십자 커서 생성
-        int size = 32;
-        crosshairTexture = new Texture2D(size, size, TextureFormat.RGBA32, false);
-        Color[] pixels = new Color[size * size];
-        
-        // 모든 픽셀을 투명하게 초기화
-        for (int i = 0; i < pixels.Length; i++)
+        Debug.Log("SnapCursorToTarget");
+        if (customCursor != null && enemy != null)
         {
-            pixels[i] = Color.clear;
+            Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
+            customCursor.MoveTo(enemyScreenPos);
         }
-        
-        // 십자 모양 그리기
-        int center = size / 2;
-        int lineWidth = 2;
-        
-        // 수직선
-        for (int y = 0; y < size; y++)
-        {
-            for (int x = center - lineWidth/2; x <= center + lineWidth/2; x++)
-            {
-                if (x >= 0 && x < size)
-                {
-                    pixels[y * size + x] = Color.white;
-                }
-            }
-        }
-        
-        // 수평선
-        for (int x = 0; x < size; x++)
-        {
-            for (int y = center - lineWidth/2; y <= center + lineWidth/2; y++)
-            {
-                if (y >= 0 && y < size)
-                {
-                    pixels[y * size + x] = Color.white;
-                }
-            }
-        }
-        
-        // 중앙에 작은 점 추가 (정확한 조준점)
-        pixels[center * size + center] = Color.red;
-        
-        crosshairTexture.SetPixels(pixels);
-        crosshairTexture.Apply();
-        
-        // 핫스팟을 텍스처 중앙으로 설정
-        cursorHotspot = new Vector2(center, center);
     }
-    
-    private void SetCrosshairCursor()
+
+    private void ReturnCursorToMouse()
     {
-        if (!isCrosshairActive)
+        Debug.Log("ReturnCursorToMouse");
+        if (customCursor != null)
         {
-            Cursor.SetCursor(crosshairTexture, cursorHotspot, CursorMode.Auto);
-            isCrosshairActive = true;
+            customCursor.ReturnToMousePos();
         }
     }
-    
-    private void SetNormalCursor()
-    {
-        if (isCrosshairActive)
-        {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-            isCrosshairActive = false;
-        }
-    }
-    
+
     private List<Enemy> FindNearbyEnemies()
     {
         List<Enemy> enemies = new List<Enemy>();
@@ -250,16 +188,10 @@ public class AutoTargeting : MonoBehaviour
         return isTargeting;
     }
     
-    // 기즈모로 감지 범위 표시 (에디터에서만)
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
-    
-    private void OnDestroy()
-    {
-        // 스크립트가 파괴될 때 커서를 기본값으로 복원
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-    }
+    //// 기즈모로 감지 범위 표시 (에디터에서만)
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    //}
 }

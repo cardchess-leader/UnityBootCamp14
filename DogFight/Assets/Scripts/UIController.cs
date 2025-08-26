@@ -61,5 +61,4 @@ public class UIController : MonoBehaviour
         expText.text = $"EXP: {exp} / {nextLevelExp}";
         levelText.text = $"LEVEL: {level}";
     }
-
 }

@@ -45,13 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce2ddc4524d68c43bef898057d439ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 100
-  snapAngleThreshold: 30
+  detectionRadius: 500
+  snapAngleThreshold: 50
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  crosshairTexture: {fileID: 0}
-  cursorHotspot: {x: 16, y: 16}
+    m_Bits: 64
 --- !u!114 &1413511743768889454
 MonoBehaviour:
   m_ObjectHideFlags: 0
