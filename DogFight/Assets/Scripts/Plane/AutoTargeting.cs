@@ -5,7 +5,7 @@ public class AutoTargeting : MonoBehaviour
 {
     [Header("Targeting Settings")]
     [SerializeField] private float detectionRadius = 100f; // 적 감지 범위
-    [SerializeField] private float snapAngleThreshold = 30f; // 스냅할 각도 임계값 (도)
+    [SerializeField] private float snapDistanceThreshold = 100f; // 스냅할 거리 임계값 (픽셀)
     [SerializeField] private LayerMask enemyLayerMask = -1; // 적 레이어 마스크
     
     private Camera playerCamera;
@@ -46,16 +46,16 @@ public class AutoTargeting : MonoBehaviour
         // 2단계: 마우스 위치 가져오기
         Vector3 mouseScreenPosition = Input.mousePosition;
         
-        // 3단계: 가장 가까운 적 찾기 (각도 기준)
-        Enemy closestEnemy = FindClosestEnemyByAngle(nearbyEnemies, mouseScreenPosition);
+        // 3단계: 가장 가까운 적 찾기 (거리 기준)
+        Enemy closestEnemy = FindClosestEnemyByDistance(nearbyEnemies, mouseScreenPosition);
         
         if (closestEnemy != null)
         {
-            // 4단계: 각도 차이 계산
-            float angleDifference = CalculateAngleDifference(mouseScreenPosition, closestEnemy);
+            // 4단계: 거리 차이 계산
+            float distance = CalculateScreenDistance(mouseScreenPosition, closestEnemy);
             
             // 5단계: 임계값보다 작으면 타겟팅
-            if (angleDifference <= snapAngleThreshold)
+            if (distance <= snapDistanceThreshold)
             {
                 SetTarget(closestEnemy);
                 SnapCursorToTarget(closestEnemy);
@@ -111,18 +111,18 @@ public class AutoTargeting : MonoBehaviour
         return enemies;
     }
     
-    private Enemy FindClosestEnemyByAngle(List<Enemy> enemies, Vector3 mouseScreenPos)
+    private Enemy FindClosestEnemyByDistance(List<Enemy> enemies, Vector3 mouseScreenPos)
     {
         Enemy closestEnemy = null;
-        float smallestAngle = float.MaxValue;
+        float smallestDistance = float.MaxValue;
         
         foreach (Enemy enemy in enemies)
         {
-            float angle = CalculateAngleDifference(mouseScreenPos, enemy);
+            float distance = CalculateScreenDistance(mouseScreenPos, enemy);
             
-            if (angle < smallestAngle)
+            if (distance < smallestDistance)
             {
-                smallestAngle = angle;
+                smallestDistance = distance;
                 closestEnemy = enemy;
             }
         }
@@ -130,24 +130,15 @@ public class AutoTargeting : MonoBehaviour
         return closestEnemy;
     }
     
-    private float CalculateAngleDifference(Vector3 mouseScreenPos, Enemy enemy)
+    private float CalculateScreenDistance(Vector3 mouseScreenPos, Enemy enemy)
     {
         // 적의 월드 좌표를 스크린 좌표로 변환
         Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
         
-        // 스크린 중앙점
-        Vector3 screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
+        // 마우스 위치와 적의 스크린 위치 사이의 거리 계산 (픽셀 단위)
+        float distance = Vector2.Distance(mouseScreenPos, enemyScreenPos);
         
-        // 스크린 중앙에서 마우스까지의 벡터
-        Vector2 mouseDirection = (mouseScreenPos - screenCenter).normalized;
-        
-        // 스크린 중앙에서 적까지의 벡터
-        Vector2 enemyDirection = (enemyScreenPos - screenCenter).normalized;
-        
-        // 두 벡터 사이의 각도 계산
-        float angle = Vector2.Angle(mouseDirection, enemyDirection);
-        
-        return angle;
+        return distance;
     }
     
     private void SetTarget(Enemy enemy)
@@ -187,11 +178,4 @@ public class AutoTargeting : MonoBehaviour
     {
         return isTargeting;
     }
-    
-    //// 기즈모로 감지 범위 표시 (에디터에서만)
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    //}
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+// 1. The missile cannot be launched if the target is null.
+// 2. If the target is destroyed or there is no target, the missile flies straight forward from its current direction.
+
 public class Missile : MonoBehaviour
 {
     [SerializeField]
@@ -32,7 +35,7 @@ public class Missile : MonoBehaviour
         }
         
         // 앞으로 이동
-        transform.position += transform.up * currentSpeed * Time.deltaTime;
+        transform.position += transform.forward * currentSpeed * Time.deltaTime;
         currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
     }
     

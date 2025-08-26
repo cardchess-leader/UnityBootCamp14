@@ -20,11 +20,6 @@ public class Move : MonoBehaviour
     float maxSpeed = 100f; // Maximum speed of the plane
     [SerializeField]
     private float rotationSpeed = 50f; // Speed of rotation for turning and pitching
-    [SerializeField]
-    private float visualRotationSpeed = 50f; // Speed of visual rotation for turning and pitching
-    [SerializeField]
-    private float rotationReturnConstant = 10f; // Speed of rotation return to 0 angle degree
-    // Rigidbody component to apply physics forces
     Rigidbody rb;
     [SerializeField]
     Lift liftComponent;

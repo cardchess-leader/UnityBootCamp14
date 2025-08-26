@@ -2,6 +2,23 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // Make this singleton so that it can be accessed from other scripts
+    public static EnemySpawner Instance { get; private set; }
+    private void Awake()
+    {
+        // Ensure that there is only one instance of EnemySpawner
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public int maxEnemyCount = 100;
+    public int currEnemyCount = 0;
     [SerializeField]
     Vector3 minXYZ;
     [SerializeField]
@@ -16,6 +33,8 @@ public class EnemySpawner : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
         if (timeSinceLastSpawn >= spawnInterval)
         {
+            if (currEnemyCount >= maxEnemyCount)
+                return;
             // Reset the timer
             timeSinceLastSpawn = 0f;
             // Generate random position within the defined bounds

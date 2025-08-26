@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //public static int maxEnemyCount = 20;
+    //public static int enemyCount = 0;
     [SerializeField]
     float speed;
     [SerializeField]
@@ -13,6 +15,7 @@ public class Enemy : MonoBehaviour
     {
         // Find the player object by tag
         player = GameObject.FindGameObjectWithTag("Player");
+        EnemySpawner.Instance.currEnemyCount++;
     }
 
     // Update is called once per frame
@@ -24,6 +27,11 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2f);
         // Move forward constantly
         transform.position += transform.forward * Time.deltaTime * speed;
+    }
+
+    private void OnDestroy()
+    {
+        EnemySpawner.Instance.currEnemyCount--;
     }
 
     // When collided with another object, destroy itself

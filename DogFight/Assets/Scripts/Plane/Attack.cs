@@ -58,7 +58,7 @@ public class Attack : MonoBehaviour
     
     private void FireMissile()
     {
-        GameObject missile = Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), transform.rotation * Quaternion.Euler(90f, 0f, 0f));
+        GameObject missile = Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), transform.rotation);
         Missile missileComponent = missile.GetComponent<Missile>();
         
         if (missileComponent != null)

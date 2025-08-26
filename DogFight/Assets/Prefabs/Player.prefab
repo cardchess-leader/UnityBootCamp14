@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 500
-  snapAngleThreshold: 50
+  snapDistanceThreshold: 100
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5135cc16e38cd5f428f75c26f8877473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missilePrefab: {fileID: 2780843491148312916, guid: f24b4f697b960c54d83d1b3f268cf020, type: 3}
+  missilePrefab: {fileID: 1440171924728945847, guid: e1e44b3c827d05f49aff2e3da65dd3d6, type: 3}
   firePoint: {fileID: 1350069114818109815}
   maxAmmo: 100
 --- !u!1 &1945508975943664909
