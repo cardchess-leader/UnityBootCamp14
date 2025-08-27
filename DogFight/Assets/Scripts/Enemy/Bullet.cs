@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace Enemy
 {
@@ -13,27 +14,20 @@ namespace Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Bullet hit " + other.name);
+            //Debug.Log($"Bullet collided with: {other.name}");
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Bullet hit player");
+                //Debug.Log($"other name is: {other.name}");
                 // Damage the player
-                var playerHealth = other.GetComponent<Health>();
+                var playerHealth = other.transform.parent.GetComponent<Health>();
                 if (playerHealth != null)
                 {
-                    Debug.Log("Bullet damaged player");
+                    //Debug.Log("Bullet damaged player");
                     playerHealth.TakeDamage(5);
                 }
             }
             // Destroy the bullet
             Destroy(gameObject);
         }
-        private void OnCollisionEnter(Collision collision)
-        {
-            Debug.Log("Bullet collided with " + collision.gameObject.name);
-            // Destroy the bullet on any collision
-            Destroy(gameObject);
-        }
     }
-
 }

@@ -151,10 +151,10 @@ public class AutoTargeting : MonoBehaviour
             currentTarget = enemy;
             currentTarget.SetTargeted(true);
             isTargeting = true;
-            SnapCursorToTarget(enemy);
         }
+        SnapCursorToTarget(enemy);
     }
-    
+
     private void ClearTarget()
     {
         if (currentTarget != null)
