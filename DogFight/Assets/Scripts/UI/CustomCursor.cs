@@ -22,7 +22,7 @@ public class CustomCursor : MonoBehaviour
     [SerializeField] private float cursorMoveSpeed = 500f; // 커서 이동 속도 조절 변수
 
     private RectTransform crosshairRect;
-    private bool isActive = true;
+    //private bool isActive = true;
     
     private void Start()
     {
@@ -35,16 +35,16 @@ public class CustomCursor : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
+    //public void ShowCrosshair()
+    //{
+    //    isActive = true;
+    //}
     
-    public void ShowCrosshair()
-    {
-        isActive = true;
-    }
-    
-    public void HideCrosshair()
-    {
-        isActive = false;
-    }
+    //public void HideCrosshair()
+    //{
+    //    isActive = false;
+    //}
 
     public void MoveTo(Vector3 targetScreenPos)
     {

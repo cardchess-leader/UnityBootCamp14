@@ -20,7 +20,7 @@ public class AutoTargeting : MonoBehaviour
         playerCamera = Camera.main;
         if (playerCamera == null)
         {
-            playerCamera = FindObjectOfType<Camera>();
+            playerCamera = FindFirstObjectByType<Camera>();
         }
 
         customCursor = CustomCursor.Instance;
@@ -75,7 +75,6 @@ public class AutoTargeting : MonoBehaviour
 
     private void SnapCursorToTarget(Enemy enemy)
     {
-        Debug.Log("SnapCursorToTarget");
         if (customCursor != null && enemy != null)
         {
             Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
@@ -85,7 +84,6 @@ public class AutoTargeting : MonoBehaviour
 
     private void ReturnCursorToMouse()
     {
-        Debug.Log("ReturnCursorToMouse");
         if (customCursor != null)
         {
             customCursor.ReturnToMousePos();

@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         // Move forward
-        transform.position += transform.up * bulletSpeed * Time.deltaTime;
+        transform.position += transform.forward * bulletSpeed * Time.deltaTime;
         
         // Track lifetime
         currentLifetime += Time.deltaTime;
