@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Enemy;
 
 public class Attack : MonoBehaviour
 {
@@ -68,7 +69,7 @@ public class Attack : MonoBehaviour
             // 자동 타겟팅이 활성화되어 있으면 타겟 설정
             if (autoTargeting != null && autoTargeting.IsTargeting())
             {
-                Enemy target = autoTargeting.GetCurrentTarget();
+                EnemyBehavior target = autoTargeting.GetCurrentTarget();
                 if (target != null)
                 {
                     missileComponent.SetTarget(target);
@@ -91,7 +92,7 @@ public class Attack : MonoBehaviour
 
                 if (autoTargeting != null && autoTargeting.IsTargeting())
                 {
-                    Enemy target = autoTargeting.GetCurrentTarget();
+                    EnemyBehavior target = autoTargeting.GetCurrentTarget();
                     if (target != null)
                     {
                         // 총알 위치에서 타겟으로의 방향 계산

@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 106485862}
   - component: {fileID: 106485865}
   - component: {fileID: 106485864}
+  - component: {fileID: 106485866}
   m_Layer: 5
   m_Name: Crosshair UI
   m_TagString: Untagged
@@ -146,7 +147,7 @@ RectTransform:
   m_GameObject: {fileID: 106485861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 908701141}
@@ -194,6 +195,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106485861}
   m_CullTransparentMesh: 1
+--- !u!114 &106485866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106485861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce09866e8c41d4645977993ece5afad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairUI: {fileID: 106485861}
+  cursorMoveSpeed: 1200
+  originalCursorColor: {r: 1, g: 1, b: 1, a: 1}
+  targetCursorColor: {r: 1, g: 0, b: 0, a: 1}
+  targetCursorScale: 1.5
+  animDuration: 0.25
 --- !u!1 &169608994
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +949,6 @@ GameObject:
   - component: {fileID: 908701139}
   - component: {fileID: 908701138}
   - component: {fileID: 908701142}
-  - component: {fileID: 908701143}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1042,21 +1060,6 @@ MonoBehaviour:
   ammoText: {fileID: 2039700368}
   expText: {fileID: 1186890861}
   levelText: {fileID: 303923183}
---- !u!114 &908701143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908701137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce09866e8c41d4645977993ece5afad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crosshairUI: {fileID: 106485861}
-  canvas: {fileID: 908701140}
-  cursorMoveSpeed: 1000
 --- !u!1 &1082121607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,6 +1468,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186890859}
   m_CullTransparentMesh: 1
+--- !u!1 &1303761815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303761816}
+  m_Layer: 0
+  m_Name: Bullet Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1303761816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303761815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 87.89397, y: 556.38904, z: -319.8682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1957938580}
+  - {fileID: 1438130938}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367468263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1577,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367468263}
   m_CullTransparentMesh: 1
+--- !u!1 &1438130937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438130938}
+  m_Layer: 0
+  m_Name: Enemy Bullet Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1438130938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438130937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1303761816}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657851188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1877,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 476aadd2b2cbdcf4d9e05f23ed2bb234, type: 2}
   - {fileID: 11400000, guid: 3f7cc4488a9e37c4487ec0e856496c9d, type: 2}
   - {fileID: 11400000, guid: 3c80c62c9cb35ba4286248d42a0bbfbf, type: 2}
+  timeScale: 1
 --- !u!64 &1766655143
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1904,6 +1972,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875981732}
   m_CullTransparentMesh: 1
+--- !u!1 &1957938579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957938580}
+  - component: {fileID: 1957938581}
+  m_Layer: 0
+  m_Name: Player Bullet Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1957938580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957938579}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1303761816}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957938581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957938579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2041113251af8a4e848719a1795510f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2455061172839266788, guid: 2b02f63ed6953cb4abe5e726e964622f, type: 3}
+  poolSize: 20
+  maxPoolSize: 100
 --- !u!1 &2039700366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,26 +2155,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039700366}
   m_CullTransparentMesh: 1
---- !u!1 &2111125886 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4878736161738910752, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
-  m_PrefabInstance: {fileID: 5811615966777930223}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2111125891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111125886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab17c909d253fc4f9a38c82d60e14d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTiltDeg: 20
-  tiltSpeed: 240
-  returnSpeed: 300
 --- !u!23 &581233283406769603
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2278,10 +2373,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4878736161738910752, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2111125891}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -2294,3 +2386,4 @@ SceneRoots:
   - {fileID: 169608997}
   - {fileID: 1722306632}
   - {fileID: 1669390717}
+  - {fileID: 1303761816}

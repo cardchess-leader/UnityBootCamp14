@@ -1,4 +1,5 @@
 using UnityEngine;
+using Enemy;
 
 // 1. The missile cannot be launched if the target is null.
 // 2. If the target is destroyed or there is no target, the missile flies straight forward from its current direction.
@@ -16,7 +17,7 @@ public class Missile : MonoBehaviour
     
     float initialSpeed;
     float currentSpeed;
-    private Enemy target;
+    private EnemyBehavior target;
     private bool hasTarget = false;
 
     private void Start()
@@ -62,7 +63,7 @@ public class Missile : MonoBehaviour
         this.initialSpeed = Mathf.Min(initialSpeed + 10, maxSpeed); // Add a small boost to the initial speed
     }
     
-    public void SetTarget(Enemy enemy)
+    public void SetTarget(EnemyBehavior enemy)
     {
         target = enemy;
         hasTarget = (target != null);

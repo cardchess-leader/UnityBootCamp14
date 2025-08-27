@@ -1,5 +1,6 @@
-using UnityEngine;
+using Enemy;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class AutoTargeting : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class AutoTargeting : MonoBehaviour
     [SerializeField] private LayerMask enemyLayerMask = -1; // 적 레이어 마스크
     
     private Camera playerCamera;
-    private Enemy currentTarget;
+    private EnemyBehavior currentTarget;
     private bool isTargeting = false;
 
     CustomCursor customCursor;
@@ -34,7 +35,7 @@ public class AutoTargeting : MonoBehaviour
     private void FindAndTargetEnemies()
     {
         // 1단계: 근처 적들 찾기
-        List<Enemy> nearbyEnemies = FindNearbyEnemies();
+        List<EnemyBehavior> nearbyEnemies = FindNearbyEnemies();
         
         if (nearbyEnemies.Count == 0)
         {
@@ -47,7 +48,7 @@ public class AutoTargeting : MonoBehaviour
         Vector3 mouseScreenPosition = Input.mousePosition;
         
         // 3단계: 가장 가까운 적 찾기 (거리 기준)
-        Enemy closestEnemy = FindClosestEnemyByDistance(nearbyEnemies, mouseScreenPosition);
+        EnemyBehavior closestEnemy = FindClosestEnemyByDistance(nearbyEnemies, mouseScreenPosition);
         
         if (closestEnemy != null)
         {
@@ -58,22 +59,19 @@ public class AutoTargeting : MonoBehaviour
             if (distance <= snapDistanceThreshold)
             {
                 SetTarget(closestEnemy);
-                SnapCursorToTarget(closestEnemy);
             }
             else
             {
                 ClearTarget();
-                ReturnCursorToMouse();
             }
         }
         else
         {
             ClearTarget();
-            ReturnCursorToMouse();
         }
     }
 
-    private void SnapCursorToTarget(Enemy enemy)
+    private void SnapCursorToTarget(EnemyBehavior enemy)
     {
         if (customCursor != null && enemy != null)
         {
@@ -90,16 +88,16 @@ public class AutoTargeting : MonoBehaviour
         }
     }
 
-    private List<Enemy> FindNearbyEnemies()
+    private List<EnemyBehavior> FindNearbyEnemies()
     {
-        List<Enemy> enemies = new List<Enemy>();
+        List<EnemyBehavior> enemies = new List<EnemyBehavior>();
         
         // Physics.OverlapSphere를 사용하여 근처 콜라이더 찾기
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
         
         foreach (Collider col in colliders)
         {
-            Enemy enemy = col.GetComponent<Enemy>();
+            EnemyBehavior enemy = col.GetComponent<EnemyBehavior>();
             if (enemy != null)
             {
                 enemies.Add(enemy);
@@ -109,12 +107,12 @@ public class AutoTargeting : MonoBehaviour
         return enemies;
     }
     
-    private Enemy FindClosestEnemyByDistance(List<Enemy> enemies, Vector3 mouseScreenPos)
+    private EnemyBehavior FindClosestEnemyByDistance(List<EnemyBehavior> enemies, Vector3 mouseScreenPos)
     {
-        Enemy closestEnemy = null;
+        EnemyBehavior closestEnemy = null;
         float smallestDistance = float.MaxValue;
         
-        foreach (Enemy enemy in enemies)
+        foreach (EnemyBehavior enemy in enemies)
         {
             float distance = CalculateScreenDistance(mouseScreenPos, enemy);
             
@@ -128,7 +126,7 @@ public class AutoTargeting : MonoBehaviour
         return closestEnemy;
     }
     
-    private float CalculateScreenDistance(Vector3 mouseScreenPos, Enemy enemy)
+    private float CalculateScreenDistance(Vector3 mouseScreenPos, EnemyBehavior enemy)
     {
         // 적의 월드 좌표를 스크린 좌표로 변환
         Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
@@ -139,7 +137,7 @@ public class AutoTargeting : MonoBehaviour
         return distance;
     }
     
-    private void SetTarget(Enemy enemy)
+    private void SetTarget(EnemyBehavior enemy)
     {
         if (currentTarget != enemy)
         {
@@ -153,6 +151,7 @@ public class AutoTargeting : MonoBehaviour
             currentTarget = enemy;
             currentTarget.SetTargeted(true);
             isTargeting = true;
+            SnapCursorToTarget(enemy);
         }
     }
     
@@ -164,10 +163,11 @@ public class AutoTargeting : MonoBehaviour
             currentTarget = null;
         }
         isTargeting = false;
+        ReturnCursorToMouse();
     }
-    
+
     // 현재 타겟 가져오기 (미사일 발사 시 사용)
-    public Enemy GetCurrentTarget()
+    public EnemyBehavior GetCurrentTarget()
     {
         return currentTarget;
     }

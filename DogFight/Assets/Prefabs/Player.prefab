@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6546858036317712277}
   - component: {fileID: 2310392893436721401}
   - component: {fileID: 1413511743768889454}
-  - component: {fileID: 6883916958605356672}
   m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
@@ -66,21 +65,6 @@ MonoBehaviour:
   missilePrefab: {fileID: 1440171924728945847, guid: e1e44b3c827d05f49aff2e3da65dd3d6, type: 3}
   firePoint: {fileID: 1350069114818109815}
   maxAmmo: 100
---- !u!114 &6883916958605356672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1350069114818109815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2041113251af8a4e848719a1795510f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2455061172839266788, guid: 2b02f63ed6953cb4abe5e726e964622f, type: 3}
-  poolSize: 20
-  maxPoolSize: 100
 --- !u!1 &1945508975943664909
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +426,7 @@ GameObject:
   - component: {fileID: 8275863166421961252}
   - component: {fileID: 6202458980469771218}
   - component: {fileID: 1485544827295276219}
+  - component: {fileID: 3355935264929393681}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -540,6 +525,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4108426412300754142, guid: be219daaa62ae7f478cdbab8b24bec1d, type: 3}
+--- !u!114 &3355935264929393681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4878736161738910752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab17c909d253fc4f9a38c82d60e14d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTiltDeg: 20
+  tiltSpeed: 240
+  returnSpeed: 300
 --- !u!1 &5987190162186220972
 GameObject:
   m_ObjectHideFlags: 0

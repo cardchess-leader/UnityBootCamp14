@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3780046336797148309}
   - component: {fileID: 1039437968912919947}
   - component: {fileID: 4698796263001529290}
+  - component: {fileID: 7820155818164706408}
   m_Layer: 6
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -152,3 +153,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   explosionEffect: {fileID: 8036918637616662261, guid: e27b990319b72eb44878275d8fcc7fd3, type: 3}
+--- !u!114 &7820155818164706408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461017542944201390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3bcc47aed306349b099cff5f3b731b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
+  range: 200
+  shootCooldown: 0.25
