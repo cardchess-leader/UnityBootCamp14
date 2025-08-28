@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1039437968912919947}
   - component: {fileID: 4698796263001529290}
   - component: {fileID: 7820155818164706408}
+  - component: {fileID: 1545811810451384073}
   m_Layer: 6
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -168,3 +169,17 @@ MonoBehaviour:
   bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
   range: 200
   shootCooldown: 0.25
+--- !u!114 &1545811810451384073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461017542944201390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35fd54ac079a8b47aa6549789157333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconPrefab: {fileID: 4922837886278913688, guid: 64491c38b1af452409456a53259a0f43, type: 3}
+  clampOnRadar: 0

@@ -72,8 +72,17 @@ public class GameManager : MonoBehaviour
 // 14. Add reloading message when reloading (Done)
 // 15. Game UI Improvements
 // 16. Find fonts that fits the low-poly art style
+// 17. Add radar system that shows nearby enemies and objectives in minimap
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (For player airplane)
 // 2. The auto-targetting is sometimes jammed. Why is this happening and how to fix this issue?
 // 3. 
+
+// List of feature upgrades
+// 1. Missile launch ability
+// 2. Rear view camera
+// 3. Radar system
+// 4. 
+
+
