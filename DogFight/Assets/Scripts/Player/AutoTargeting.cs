@@ -12,6 +12,7 @@ public class AutoTargeting : MonoBehaviour
     private Camera playerCamera;
     private EnemyBehavior currentTarget;
     private bool isTargeting = false;
+    private bool lockMode = false;
 
     CustomCursor customCursor;
 
@@ -29,9 +30,24 @@ public class AutoTargeting : MonoBehaviour
 
     private void Update()
     {
-        FindAndTargetEnemies();
+        //FindAndTargetEnemies();
+        // Toggle lock mode with 'L' key
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            lockMode = !lockMode;
+        }
+
+        if (lockMode)
+        {
+            // In lock mode, always find and target enemies
+            FindAndTargetEnemies();
+        }
+        else
+        {
+            ClearTarget();
+        }
     }
-    
+
     private void FindAndTargetEnemies()
     {
         // 1단계: 근처 적들 찾기

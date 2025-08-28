@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     // Move forward at a accelerating speed
     [SerializeField]
     float bulletSpeed;
+
     // Include a explosion effect on impact in the future
     [SerializeField]
     GameObject explosionEffect;

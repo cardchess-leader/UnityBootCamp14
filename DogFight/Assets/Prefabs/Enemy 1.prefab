@@ -181,5 +181,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35fd54ac079a8b47aa6549789157333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconPrefab: {fileID: 4922837886278913688, guid: 64491c38b1af452409456a53259a0f43, type: 3}
+  iconPrefab: {fileID: 3175715734412755859, guid: 0187655b15a3b6c4e93891f32c5d53c3, type: 3}
   clampOnRadar: 0

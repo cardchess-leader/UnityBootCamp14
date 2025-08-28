@@ -70,9 +70,15 @@ public class GameManager : MonoBehaviour
 // 12. Implement level progression with increasing difficulty
 // 13. Add Rear View Camera (Done)
 // 14. Add reloading message when reloading (Done)
-// 15. Game UI Improvements
+// 15. Game UI Improvements 
 // 16. Find fonts that fits the low-poly art style
-// 17. Add radar system that shows nearby enemies and objectives in minimap
+// 17. Add radar system that shows nearby enemies and objectives in minimap (Done)
+// 18. Implement missile smoke trails system (Done)
+// 19. Give the bullets firing a small noise to simulate inaccuracy (Done)
+// 20. Lock-on only applies when launching missiles
+// 21. Add weapon selection system
+// 22. Special skill: target all enemies on screen and lock-on them all
+// 23. 
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (For player airplane)

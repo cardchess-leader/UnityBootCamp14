@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 namespace Enemy
 {
@@ -6,6 +5,7 @@ namespace Enemy
     {
         [SerializeField]
         float speed = 10f;
+
         // Move towards the player
         void Update()
         {
@@ -17,12 +17,9 @@ namespace Enemy
             //Debug.Log($"Bullet collided with: {other.name}");
             if (other.CompareTag("Player"))
             {
-                //Debug.Log($"other name is: {other.name}");
-                // Damage the player
                 var playerHealth = other.transform.parent.GetComponent<Health>();
                 if (playerHealth != null)
                 {
-                    //Debug.Log("Bullet damaged player");
                     playerHealth.TakeDamage(5);
                 }
             }

@@ -9,6 +9,8 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject firePoint;
     [SerializeField]
+    float spreadAngle = 2f; // degrees of random spread for bullets
+    [SerializeField]
     int maxAmmo;
     int currentAmmo;
     Coroutine reloadCoroutine;
@@ -46,8 +48,8 @@ public class Attack : MonoBehaviour
             if (currentAmmo < 1) return;
             currentAmmo -= 1;
             // Double barrel gun fire using BulletPool
-            FireBullet(firePoint.transform.position + new Vector3(0.5f, 0, 0.3f));
-            FireBullet(firePoint.transform.position + new Vector3(-0.5f, 0, 0.1f));
+            FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
+            FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
             UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         }
         // Start reloading when 'R' is pressed
@@ -57,10 +59,17 @@ public class Attack : MonoBehaviour
         }
     }
 
+    Missile CreateMissile()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 targetPoint = ray.GetPoint(200);
+        Quaternion rotation = Quaternion.LookRotation((targetPoint - firePoint.transform.position).normalized);
+        return Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), rotation).GetComponent<Missile>();
+    }
+
     private void FireMissile()
     {
-        GameObject missile = Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), transform.rotation);
-        Missile missileComponent = missile.GetComponent<Missile>();
+        Missile missileComponent = CreateMissile();
 
         if (missileComponent != null)
         {
@@ -102,16 +111,26 @@ public class Attack : MonoBehaviour
                     else
                     {
                         // 타겟이 없으면 기본 방향 (비행기 앞쪽)
-                        targetRotation = transform.rotation;
+                        //targetRotation = transform.rotation;
+                        // 타겟이 없으면 마우스 방향으로
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        Vector3 targetPoint = ray.GetPoint(200);
+                        targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);
                     }
                 }
                 else
                 {
-                    // 자동 타겟팅이 비활성화되어 있으면 기본 방향
-                    targetRotation = transform.rotation;
+                    //// 자동 타겟팅이 비활성화되어 있으면 기본 방향
+                    //targetRotation = transform.rotation;
+                    // 타겟이 없으면 마우스 방향으로
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Vector3 targetPoint = ray.GetPoint(200);
+                    targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);
                 }
 
                 bullet.transform.rotation = targetRotation;
+                bullet.transform.Rotate(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0f, Space.Self);
+
                 bullet.GetComponent<Bullet>()?.ResetBullet();
             }
         }

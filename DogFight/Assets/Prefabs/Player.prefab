@@ -64,7 +64,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 1440171924728945847, guid: e1e44b3c827d05f49aff2e3da65dd3d6, type: 3}
   firePoint: {fileID: 1350069114818109815}
-  maxAmmo: 100
+  spreadAngle: 10
+  maxAmmo: 500
 --- !u!1 &1945508975943664909
 GameObject:
   m_ObjectHideFlags: 0

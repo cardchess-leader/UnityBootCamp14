@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 200
+  spreadAngle: 45
   explosionEffect: {fileID: 1947689297184224437, guid: f1ba3431ad651f149aedd3256f6d700f, type: 3}
 --- !u!1 &3510345938722715613
 GameObject:
