@@ -12,8 +12,11 @@ public class Attack : MonoBehaviour
     float spreadAngle = 2f; // degrees of random spread for bullets
     [SerializeField]
     int maxAmmo;
+    [SerializeField]
+    float fireCooldown = 0.2f; // Minimum time between shots
     int currentAmmo;
     Coroutine reloadCoroutine;
+    float lastFireTime = 0f;
 
     // 자동 타겟팅 참조
     private AutoTargeting autoTargeting;
@@ -32,25 +35,62 @@ public class Attack : MonoBehaviour
     void Update()
     {
         // 스페이스바를 누르면 미사일 발사
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift))
         {
-            // Missile requires 10 ammo
-            if (currentAmmo < 10) return;
-            currentAmmo -= 10;
+            switch(Inventory.Instance.weaponMode)
+            {
+                case Inventory.WeaponMode.Missile:
+                    // Missile requires 10 ammo
+                    if (currentAmmo < 10) return;
+                    currentAmmo -= 10;
 
-            FireMissile();
-            UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+                    FireMissile();
+                    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+                    break;
+                //case Inventory.WeaponMode.MachineGun:
+                //    // Give small fraction of cooltime to prevent too fast shooting
+                //    if (Time.time - lastFireTime < fireCooldown) return;
+                //    lastFireTime = Time.time;
+
+                //    // Bullet requires 1 ammo
+                //    if (currentAmmo < 1) return;
+                //    currentAmmo -= 1;
+                //    // Double barrel gun fire using BulletPool
+                //    // Fire from multiple points
+                //    FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
+                //    FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
+                //    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+                //    break;
+            }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
         {
-            // Bullet requires 1 ammo
-            if (currentAmmo < 1) return;
-            currentAmmo -= 1;
-            // Double barrel gun fire using BulletPool
-            FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
-            FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
-            UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+            switch (Inventory.Instance.weaponMode)
+            {
+                //case Inventory.WeaponMode.Missile:
+                //    // Missile requires 10 ammo
+                //    if (currentAmmo < 10) return;
+                //    currentAmmo -= 10;
+
+                //    FireMissile();
+                //    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+                //    break;
+                case Inventory.WeaponMode.MachineGun:
+                    // Give small fraction of cooltime to prevent too fast shooting
+                    if (Time.time - lastFireTime < fireCooldown) return;
+                    lastFireTime = Time.time;
+
+                    // Bullet requires 1 ammo
+                    if (currentAmmo < 1) return;
+                    currentAmmo -= 1;
+                    // Double barrel gun fire using BulletPool
+                    // Fire from multiple points
+                    FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
+                    FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
+                    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+                    break;
+            }
         }
         // Start reloading when 'R' is pressed
         if (Input.GetKeyDown(KeyCode.R))
@@ -110,9 +150,6 @@ public class Attack : MonoBehaviour
                     }
                     else
                     {
-                        // 타겟이 없으면 기본 방향 (비행기 앞쪽)
-                        //targetRotation = transform.rotation;
-                        // 타겟이 없으면 마우스 방향으로
                         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                         Vector3 targetPoint = ray.GetPoint(200);
                         targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);
@@ -120,9 +157,6 @@ public class Attack : MonoBehaviour
                 }
                 else
                 {
-                    //// 자동 타겟팅이 비활성화되어 있으면 기본 방향
-                    //targetRotation = transform.rotation;
-                    // 타겟이 없으면 마우스 방향으로
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     Vector3 targetPoint = ray.GetPoint(200);
                     targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);

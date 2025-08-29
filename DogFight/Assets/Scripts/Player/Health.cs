@@ -42,6 +42,7 @@ public class Health : MonoBehaviour
     {
         // Apply damage, but hp does not go below 0
         currentHealth = Mathf.Max(currentHealth - damage, 0);
+        HitEffect.Instance.OnDamaged(damage, maxHealth);
 
         UIController.Instance.UpdateHpText(currentHealth, maxHealth);
         if (currentHealth <= 0)

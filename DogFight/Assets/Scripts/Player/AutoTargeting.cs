@@ -30,12 +30,8 @@ public class AutoTargeting : MonoBehaviour
 
     private void Update()
     {
-        //FindAndTargetEnemies();
-        // Toggle lock mode with 'L' key
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            lockMode = !lockMode;
-        }
+        // When holding right mouse button, enable lock mode. Otherwise, disable it.
+        lockMode = Input.GetMouseButton(1);
 
         if (lockMode)
         {

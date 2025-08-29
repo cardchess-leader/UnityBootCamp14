@@ -7,3 +7,7 @@ Generic Aircraft Models
 JMO Assets
 SlimUI
 TextMesh Pro
+
+
+Refer to the following text file for any package file changes (that are required when cloning this into new project)
+PackageUpdate.txt

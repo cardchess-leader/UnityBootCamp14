@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Enemy
@@ -6,6 +7,19 @@ namespace Enemy
     {
         // Make this singleton so that it can be accessed from other scripts
         public static EnemySpawner Instance { get; private set; }
+        public int maxEnemyCount = 100;
+        public int currEnemyCount = 0;
+        [SerializeField]
+        Vector3 minXYZ;
+        [SerializeField]
+        Vector3 maxXYZ;
+        [SerializeField]
+        GameObject GameObject;
+        [SerializeField]
+        float spawnInterval = 2f; // Spawn new enemy every 2 seconds
+        float timeSinceLastSpawn = 0f;
+        bool isSpawning = false;
+
         private void Awake()
         {
             // Ensure that there is only one instance of EnemySpawner
@@ -19,19 +33,14 @@ namespace Enemy
             }
         }
 
-        public int maxEnemyCount = 100;
-        public int currEnemyCount = 0;
-        [SerializeField]
-        Vector3 minXYZ;
-        [SerializeField]
-        Vector3 maxXYZ;
-        [SerializeField]
-        GameObject GameObject;
-        [SerializeField]
-        float spawnInterval = 2f; // Spawn new enemy every 2 seconds
-        float timeSinceLastSpawn = 0f;
+        private void Start()
+        {
+            StartCoroutine(StartSpawningAfterDelay(5f));
+        }
+
         private void Update()
         {
+            if (!isSpawning) return;
             timeSinceLastSpawn += Time.deltaTime;
             if (timeSinceLastSpawn >= spawnInterval)
             {
@@ -47,6 +56,12 @@ namespace Enemy
                 // Instantiate a new enemy at the random position with no rotation
                 Instantiate(GameObject, spawnPosition, Quaternion.identity);
             }
+        }
+
+        IEnumerator StartSpawningAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            isSpawning = true;
         }
     }
 }

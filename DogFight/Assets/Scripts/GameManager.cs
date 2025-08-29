@@ -78,12 +78,17 @@ public class GameManager : MonoBehaviour
 // 20. Lock-on only applies when launching missiles
 // 21. Add weapon selection system
 // 22. Special skill: target all enemies on screen and lock-on them all
-// 23. 
+// 23. Timer system (Done)
+// 24. Different customcursor for different weapon types
+// 25. Make different weapon details into ScriptableObject
+// 26. Make Inventory system for weapons and items
+// 27. Make different enemy types with different behaviors (Make a new script for each enemy type, and hold shared behavior in a base class)
+// 28. Make inventories notifier of each equipped weapons. (Like in Overwatch)
 
 // Bugfix
-// 1. When shooting bullets, sudden move when tilting sideways (For player airplane)
-// 2. The auto-targetting is sometimes jammed. Why is this happening and how to fix this issue?
-// 3. 
+// 1. When shooting bullets, sudden move when tilting sideways (Fixed)
+// 2. The auto-targetting is sometimes jammed. Why is this happening and how to fix this issue? (Fixed)
+// 3. At the start of the game, the radar system is blinking from the center.  (Fixed)
 
 // List of feature upgrades
 // 1. Missile launch ability
