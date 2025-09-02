@@ -66,6 +66,7 @@ MonoBehaviour:
   firePoint: {fileID: 1350069114818109815}
   spreadAngle: 10
   maxAmmo: 500
+  fireCooldown: 0.05
 --- !u!1 &1945508975943664909
 GameObject:
   m_ObjectHideFlags: 0

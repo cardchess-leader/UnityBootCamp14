@@ -47,4 +47,10 @@ public class Inventory : MonoBehaviour
             inventorySlotList[1].Highlight(true);
         }
     }
+
+    public void UseSkill(int index)
+    {
+        Debug.Log("index is: " + index);
+        inventorySlotList[index].GetComponent<Cooldown>().StartCooldown(3f); // Example cooldown time
+    }
 }

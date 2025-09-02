@@ -84,6 +84,10 @@ public class GameManager : MonoBehaviour
 // 26. Make Inventory system for weapons and items
 // 27. Make different enemy types with different behaviors (Make a new script for each enemy type, and hold shared behavior in a base class)
 // 28. Make inventories notifier of each equipped weapons. (Like in Overwatch)
+// 29. Build a storyline and missions
+// 30. Add checkpoints and save/load system
+// 31. Implement multiplayer functionality (e.g., co-op or PvP modes)
+// 32. Implement text animation and sound effects for the storyline and missions
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (Fixed)

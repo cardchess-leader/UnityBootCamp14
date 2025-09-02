@@ -23,20 +23,48 @@ public class Move : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Lift liftComponent;
+    float thrustPower; // Current thrust power
 
     float timeSinceStart = 0f; // Timer to track how long the plane has been moving
     private bool canControl = false; // Flag to check if the player can control the plane
+    Coroutine boostCoroutine;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the plane
         StartCoroutine(EnableControlCoroutine());
+        StartCoroutine(InitThrust());
+    }
+
+    private void Update()
+    {
+        // If pressing space key, do something.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (boostCoroutine != null)
+            {
+                return;
+            }
+            boostCoroutine = StartCoroutine(BoostSpeed());
+        }
+    }
+
+    IEnumerator BoostSpeed()
+    {
+        Inventory.Instance.UseSkill(2);
+        Debug.Log("Boosting Speed!");
+        thrustPower *= 3; // Double the thrust power
+        maxSpeed *= 2; // Double the max speed
+        yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
+        thrustPower /= 3;
+        maxSpeed /= 2;
+        boostCoroutine = null;
     }
 
     private void FixedUpdate()
     {
         // Apply thrust continuously
-        float thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
+        //thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
         rb.AddForce(transform.forward * thrustPower * Time.fixedDeltaTime, ForceMode.Acceleration); // Apply forward force to the plane
         timeSinceStart += Time.fixedDeltaTime; // Increment the timer
 
@@ -47,6 +75,20 @@ public class Move : MonoBehaviour
 
         LimitSpeed();
         UpdateUI();
+    }
+
+    IEnumerator InitThrust()
+    {
+        while(true)
+        {
+            if (thrustPower >= maxThrustPower)
+            {
+                thrustPower = maxThrustPower;
+                yield break; // Exit the coroutine when max thrust power is reached
+            }
+            thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
+            yield return null;
+        }
     }
 
     private void HandlePlayerInput()
@@ -88,7 +130,8 @@ public class Move : MonoBehaviour
     {
         if (Speed > maxSpeed) // Assuming 100 m/s is the max speed
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
+            //rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
+            rb.AddForce(-transform.forward * thrustPower * 1.1f * Time.fixedDeltaTime, ForceMode.Acceleration);
         }
     }
 }

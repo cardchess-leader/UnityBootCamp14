@@ -35,7 +35,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
         // 스페이스바를 누르면 미사일 발사
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             switch(Inventory.Instance.weaponMode)
             {
@@ -47,35 +47,13 @@ public class Attack : MonoBehaviour
                     FireMissile();
                     UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
                     break;
-                //case Inventory.WeaponMode.MachineGun:
-                //    // Give small fraction of cooltime to prevent too fast shooting
-                //    if (Time.time - lastFireTime < fireCooldown) return;
-                //    lastFireTime = Time.time;
-
-                //    // Bullet requires 1 ammo
-                //    if (currentAmmo < 1) return;
-                //    currentAmmo -= 1;
-                //    // Double barrel gun fire using BulletPool
-                //    // Fire from multiple points
-                //    FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
-                //    FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
-                //    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
-                //    break;
             }
         }
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             switch (Inventory.Instance.weaponMode)
             {
-                //case Inventory.WeaponMode.Missile:
-                //    // Missile requires 10 ammo
-                //    if (currentAmmo < 10) return;
-                //    currentAmmo -= 10;
-
-                //    FireMissile();
-                //    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
-                //    break;
                 case Inventory.WeaponMode.MachineGun:
                     // Give small fraction of cooltime to prevent too fast shooting
                     if (Time.time - lastFireTime < fireCooldown) return;
