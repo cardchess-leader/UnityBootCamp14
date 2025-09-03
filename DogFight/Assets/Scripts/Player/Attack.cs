@@ -37,43 +37,62 @@ public class Attack : MonoBehaviour
         // 스페이스바를 누르면 미사일 발사
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            switch(Inventory.Instance.weaponMode)
-            {
-                case Inventory.WeaponMode.Missile:
-                    // Missile requires 10 ammo
-                    if (currentAmmo < 10) return;
-                    currentAmmo -= 10;
+            // Missile requires 10 ammo
+            if (currentAmmo < 10) return;
+            currentAmmo -= 10;
 
-                    FireMissile();
-                    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
-                    break;
-            }
+            FireMissile();
+            UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        // 왼쪽 마우스 키를 누르고 있을 때 기관총 발사
+        if (Input.GetMouseButton(0))
         {
-            switch (Inventory.Instance.weaponMode)
-            {
-                case Inventory.WeaponMode.MachineGun:
-                    // Give small fraction of cooltime to prevent too fast shooting
-                    if (Time.time - lastFireTime < fireCooldown) return;
-                    lastFireTime = Time.time;
+            // Give small fraction of cooltime to prevent too fast shooting
+            if (Time.time - lastFireTime < fireCooldown) return;
+            lastFireTime = Time.time;
 
-                    // Bullet requires 1 ammo
-                    if (currentAmmo < 1) return;
-                    currentAmmo -= 1;
-                    // Double barrel gun fire using BulletPool
-                    // Fire from multiple points
-                    FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
-                    FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
-                    UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
-                    break;
-            }
+            // Bullet requires 1 ammo
+            if (currentAmmo < 1) return;
+            currentAmmo -= 1;
+            // Double barrel gun fire using BulletPool
+            // Fire from multiple points
+            FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
+            FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
+            UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         }
-        // Start reloading when 'R' is pressed
+
+        // R 키를 누르면 재장전
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
+        }
+
+        // Q 키를 누르면 범위내에 있는 모든 적에게 미사일 발사
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (autoTargeting != null)
+            {
+                StartCoroutine(LaunchHellfireMissiles());
+            }
+        }
+    }
+
+    IEnumerator LaunchHellfireMissiles()
+    {
+        var targets = autoTargeting.FindNearbyEnemies();
+        foreach (var target in targets)
+        {
+            if (currentAmmo < 10) break; // 미사일 발사에 필요한 탄약이 부족하면 중지
+            currentAmmo -= 10;
+            target.ShowTarget();
+        }
+        UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+        yield return new WaitForSeconds(1f); // 1초 대기 후 미사일 발사
+
+        foreach (var target in targets)
+        {
+            FireMissile(target);
         }
     }
 
@@ -85,7 +104,7 @@ public class Attack : MonoBehaviour
         return Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), rotation).GetComponent<Missile>();
     }
 
-    private void FireMissile()
+    private void FireMissile(EnemyBehavior target = null)
     {
         Missile missileComponent = CreateMissile();
 
@@ -93,13 +112,21 @@ public class Attack : MonoBehaviour
         {
             missileComponent.SetInitSpeed(transform.parent.GetComponent<Rigidbody>().linearVelocity.magnitude);
 
-            // 자동 타겟팅이 활성화되어 있으면 타겟 설정
-            if (autoTargeting != null && autoTargeting.IsTargeting())
+            // 타겟이 정해져 있으면 타겟 설정
+            if (target != null)
             {
-                EnemyBehavior target = autoTargeting.GetCurrentTarget();
-                if (target != null)
+                missileComponent.SetTarget(target);
+            }
+            else
+            {
+                // 타겟이 없으면 자동 타겟팅이 활성화되어 있으면 타겟 설정
+                if (autoTargeting != null && autoTargeting.IsTargeting())
                 {
-                    missileComponent.SetTarget(target);
+                    EnemyBehavior autoTarget = autoTargeting.GetCurrentTarget();
+                    if (autoTarget != null)
+                    {
+                        missileComponent.SetTarget(autoTarget);
+                    }
                 }
             }
         }

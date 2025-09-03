@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Enemy
@@ -8,6 +9,8 @@ namespace Enemy
         float speed;
         [SerializeField]
         GameObject explosionEffect;
+        [SerializeField]
+        GameObject aimTarget;
         GameObject player;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,6 +53,17 @@ namespace Enemy
                 renderer.material.color = Color.red;
             else
                 renderer.material.color = Color.white;
+        }
+
+        public void ShowTarget() {
+            StartCoroutine(ShowTargetCoroutine());
+        }
+
+        IEnumerator ShowTargetCoroutine()
+        {
+            aimTarget.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            aimTarget.SetActive(false);
         }
     }
 }

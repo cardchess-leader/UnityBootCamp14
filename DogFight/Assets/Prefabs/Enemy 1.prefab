@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &392850626541767451
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2684128550893530251}
@@ -254,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   explosionEffect: {fileID: 8036918637616662261, guid: e27b990319b72eb44878275d8fcc7fd3, type: 3}
+  aimTarget: {fileID: 8279843737029094516}
 --- !u!114 &7820155818164706408
 MonoBehaviour:
   m_ObjectHideFlags: 0

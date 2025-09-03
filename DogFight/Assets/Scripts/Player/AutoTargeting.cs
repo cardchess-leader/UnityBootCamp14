@@ -100,7 +100,7 @@ public class AutoTargeting : MonoBehaviour
         }
     }
 
-    private List<EnemyBehavior> FindNearbyEnemies()
+    public List<EnemyBehavior> FindNearbyEnemies()
     {
         List<EnemyBehavior> enemies = new List<EnemyBehavior>();
         
