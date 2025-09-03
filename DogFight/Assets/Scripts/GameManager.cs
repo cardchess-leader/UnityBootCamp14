@@ -88,6 +88,8 @@ public class GameManager : MonoBehaviour
 // 30. Add checkpoints and save/load system
 // 31. Implement multiplayer functionality (e.g., co-op or PvP modes)
 // 32. Implement text animation and sound effects for the storyline and missions
+// 33. Implement Hellfire missile skill (Done)
+// 34. 
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (Fixed)
@@ -101,4 +103,14 @@ public class GameManager : MonoBehaviour
 // 3. Radar system
 // 4. 
 
+
+// List of Skills to implement
+// 1. Hellfire missile barrage (Done)
+// 2. Speed boost (Done)
+// 3. EMP blast (Not done)
+// 4. Stealth mode (Not done)
+// 5. Shield (Not done)
+// 6. Call airstrike (Not done)
+// 7. Repair drone (Not done)
+// 8. 
 

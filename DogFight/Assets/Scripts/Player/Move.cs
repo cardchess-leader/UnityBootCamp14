@@ -25,6 +25,11 @@ public class Move : MonoBehaviour
     Lift liftComponent;
     float thrustPower; // Current thrust power
 
+    [SerializeField]
+    Material originalMat;
+    [SerializeField]
+    Material stealthMat;
+
     float timeSinceStart = 0f; // Timer to track how long the plane has been moving
     private bool canControl = false; // Flag to check if the player can control the plane
     Coroutine boostCoroutine;
@@ -46,6 +51,12 @@ public class Move : MonoBehaviour
                 return;
             }
             boostCoroutine = StartCoroutine(BoostSpeed());
+        }
+
+        // E 키를 누르면 스텔스 모드 5초간 활성화
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(ActivateStealth());
         }
     }
 
@@ -132,6 +143,62 @@ public class Move : MonoBehaviour
         {
             //rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
             rb.AddForce(-transform.forward * thrustPower * 1.1f * Time.fixedDeltaTime, ForceMode.Acceleration);
+        }
+    }
+
+
+    IEnumerator ActivateStealth()
+    {
+        Debug.Log("Activating Stealth Mode!");
+        yield return new WaitForSeconds(0.1f); // 약간의 딜레이
+        // Switch to stealth material
+        // Get all renderers in the plane and its children
+        // Gradually make the plane invisible
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        Debug.Log("Found " + renderers.Length + " renderers.");
+        foreach (var renderer in renderers)
+        {
+            if (stealthMat != null)
+            {
+                renderer.material = stealthMat;
+            }
+            Color originalColor = renderer.material.color;
+            float elapsedTime = 0f;
+            float duration = 1f; // 1초 동안 투명해짐
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0.2f, elapsedTime / duration);
+                renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+                yield return null;
+            }
+            renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.2f);
+        }
+        Debug.Log("Stealth Activated!");
+        yield return new WaitForSeconds(5f); // 5초간 스텔스 모드 유지
+        Debug.Log("Deactivating Stealth Mode!");
+        // Gradually make the plane visible again
+        //foreach (var renderer in renderers)
+        //{
+        //    Color originalColor = renderer.material.color;
+        //    float elapsedTime = 0f;
+        //    float duration = 0.5f; // 1초 동안 다시 보이게 됨
+        //    while (elapsedTime < duration)
+        //    {
+        //        elapsedTime += Time.deltaTime;
+        //        float alpha = Mathf.Lerp(0.2f, 1f, elapsedTime / duration);
+        //        renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+        //        yield return null;
+        //    }
+        //    renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+        //}
+        // Switch back to original material
+        foreach (var renderer in renderers)
+        {
+            if (originalMat != null)
+            {
+                renderer.material = originalMat;
+            }
         }
     }
 }

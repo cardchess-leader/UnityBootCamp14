@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using NUnit.Framework;
 
 public class Attack : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class Attack : MonoBehaviour
     int currentAmmo;
     Coroutine reloadCoroutine;
     float lastFireTime = 0f;
+    Coroutine hellfireMissileCoroutine;
 
     // 자동 타겟팅 참조
     private AutoTargeting autoTargeting;
@@ -71,9 +74,10 @@ public class Attack : MonoBehaviour
         // Q 키를 누르면 범위내에 있는 모든 적에게 미사일 발사
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (autoTargeting != null)
+            Inventory.Instance.UseSkill(3);
+            if (autoTargeting != null && hellfireMissileCoroutine == null)
             {
-                StartCoroutine(LaunchHellfireMissiles());
+                hellfireMissileCoroutine = StartCoroutine(LaunchHellfireMissiles());
             }
         }
     }
@@ -81,19 +85,27 @@ public class Attack : MonoBehaviour
     IEnumerator LaunchHellfireMissiles()
     {
         var targets = autoTargeting.FindNearbyEnemies();
+        var validTargets = new List<EnemyBehavior>();
         foreach (var target in targets)
         {
-            if (currentAmmo < 10) break; // 미사일 발사에 필요한 탄약이 부족하면 중지
-            currentAmmo -= 10;
-            target.ShowTarget();
+            if (currentAmmo >= 10)
+            {
+                currentAmmo -= 10;
+                target.ShowTarget();
+                validTargets.Add(target);
+            } else
+            {
+                break;
+            }
         }
         UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         yield return new WaitForSeconds(1f); // 1초 대기 후 미사일 발사
 
-        foreach (var target in targets)
+        foreach (var target in validTargets)
         {
             FireMissile(target);
         }
+        hellfireMissileCoroutine = null;
     }
 
     Missile CreateMissile()

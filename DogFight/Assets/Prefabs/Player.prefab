@@ -261,6 +261,8 @@ MonoBehaviour:
   maxSpeed: 100
   rotationSpeed: 5
   liftComponent: {fileID: 7726085767386797928}
+  originalMat: {fileID: 2100000, guid: df938a229a3dd8849a7a5590ad15f613, type: 2}
+  stealthMat: {fileID: 2100000, guid: 9601ebdb02830ac41b2ee982b9565e1c, type: 2}
 --- !u!114 &7726085767386797928
 MonoBehaviour:
   m_ObjectHideFlags: 0

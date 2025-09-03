@@ -3729,6 +3729,10 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1485544827295276219, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2310392893436721401, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: snapAngleThreshold
       value: 15
@@ -3738,12 +3742,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2465234584410814289, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465234584410814289, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3468513362619179517, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878736161738910752, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6938371551003747967, guid: a46dde8cad3bb574c955aaf6c81fff93, type: 3}
       propertyPath: m_Enabled
