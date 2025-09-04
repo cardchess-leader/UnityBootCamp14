@@ -100,12 +100,12 @@ public class AutoTargeting : MonoBehaviour
         }
     }
 
-    public List<EnemyBehavior> FindNearbyEnemies()
+    public List<EnemyBehavior> FindNearbyEnemies(float? range = null)
     {
         List<EnemyBehavior> enemies = new List<EnemyBehavior>();
         
         // Physics.OverlapSphere를 사용하여 근처 콜라이더 찾기
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range ?? detectionRadius, enemyLayerMask);
         
         foreach (Collider col in colliders)
         {

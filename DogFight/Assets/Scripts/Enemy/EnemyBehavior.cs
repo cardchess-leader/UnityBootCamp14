@@ -35,14 +35,14 @@ namespace Enemy
         private void OnDestroy()
         {
             EnemySpawner.Instance.currEnemyCount--;
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            GameManager.Instance.AddExp(10);
         }
 
         // When collided with another object, destroy itself
         private void OnCollisionEnter(Collision collision)
         {
             Destroy(gameObject);
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            GameManager.Instance.AddExp(10);
         }
 
         public void SetTargeted(bool isTargeted)

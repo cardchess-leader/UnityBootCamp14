@@ -9,7 +9,11 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject missilePrefab;
     [SerializeField]
+    GameObject nukePrefab;
+    [SerializeField]
     GameObject firePoint;
+    [SerializeField]
+    GameObject nukeDropPoint;
     [SerializeField]
     float spreadAngle = 2f; // degrees of random spread for bullets
     [SerializeField]
@@ -80,11 +84,18 @@ public class Attack : MonoBehaviour
                 hellfireMissileCoroutine = StartCoroutine(LaunchHellfireMissiles());
             }
         }
+
+        // Z ≈∞∏¶ ¥©∏£∏È «Ÿ∆¯≈∫ ≈ı«œ
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Inventory.Instance.UseSkill(5);
+            Instantiate(nukePrefab, nukeDropPoint.transform.position, Quaternion.identity);
+        }
     }
 
     IEnumerator LaunchHellfireMissiles()
     {
-        var targets = autoTargeting.FindNearbyEnemies();
+        var targets = autoTargeting.FindNearbyEnemies(2000);
         var validTargets = new List<EnemyBehavior>();
         foreach (var target in targets)
         {

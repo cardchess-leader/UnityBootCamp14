@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void AddExp(int amount)
     {
         exp += amount;
-        if (exp >= levelList[level].expToNextLevel)
+        if (exp >= levelList[level].expToNextLevel && level < levelList.Count - 1)
         {
             exp -= levelList[level].expToNextLevel;
             level++;
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 // 31. Implement multiplayer functionality (e.g., co-op or PvP modes)
 // 32. Implement text animation and sound effects for the storyline and missions
 // 33. Implement Hellfire missile skill (Done)
-// 34. 
+// 34. Incremental slot expansion system for skills (Not done)
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (Fixed)
@@ -112,5 +112,6 @@ public class GameManager : MonoBehaviour
 // 5. Shield (Not done)
 // 6. Call airstrike (Not done)
 // 7. Repair drone (Not done)
-// 8. 
+// 8. Nuke launch (Not done)
+// 
 

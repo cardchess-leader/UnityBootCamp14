@@ -146,9 +146,9 @@ public class Move : MonoBehaviour
         }
     }
 
-
     IEnumerator ActivateStealth()
     {
+        Inventory.Instance.UseSkill(4);
         Debug.Log("Activating Stealth Mode!");
         yield return new WaitForSeconds(0.1f); // 약간의 딜레이
         // Switch to stealth material
