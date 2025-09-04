@@ -94,9 +94,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 1440171924728945847, guid: e1e44b3c827d05f49aff2e3da65dd3d6, type: 3}
+  nukePrefab: {fileID: 0}
   firePoint: {fileID: 1350069114818109815}
+  nukeDropPoint: {fileID: 0}
   spreadAngle: 10
-  maxAmmo: 500
+  maxAmmo: 10000
   fireCooldown: 0.05
 --- !u!1 &1945508975943664909
 GameObject:
@@ -212,6 +214,7 @@ GameObject:
   - component: {fileID: 58208724724287019}
   - component: {fileID: 7726085767386797928}
   - component: {fileID: 6309366296940448462}
+  - component: {fileID: 8684699228042166470}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -322,6 +325,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &8684699228042166470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465234584410814289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f5236d00ced7f47afd39657f884366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4104442431785560382
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +658,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5

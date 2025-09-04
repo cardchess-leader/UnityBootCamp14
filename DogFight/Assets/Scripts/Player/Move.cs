@@ -63,7 +63,6 @@ public class Move : MonoBehaviour
     IEnumerator BoostSpeed()
     {
         Inventory.Instance.UseSkill(2);
-        Debug.Log("Boosting Speed!");
         thrustPower *= 3; // Double the thrust power
         maxSpeed *= 2; // Double the max speed
         yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
@@ -75,7 +74,6 @@ public class Move : MonoBehaviour
     private void FixedUpdate()
     {
         // Apply thrust continuously
-        //thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
         rb.AddForce(transform.forward * thrustPower * Time.fixedDeltaTime, ForceMode.Acceleration); // Apply forward force to the plane
         timeSinceStart += Time.fixedDeltaTime; // Increment the timer
 
@@ -149,13 +147,10 @@ public class Move : MonoBehaviour
     IEnumerator ActivateStealth()
     {
         Inventory.Instance.UseSkill(4);
-        Debug.Log("Activating Stealth Mode!");
+        GetComponent<Player>().isStealthMode = true;
         yield return new WaitForSeconds(0.1f); // 약간의 딜레이
         // Switch to stealth material
-        // Get all renderers in the plane and its children
-        // Gradually make the plane invisible
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        Debug.Log("Found " + renderers.Length + " renderers.");
         foreach (var renderer in renderers)
         {
             if (stealthMat != null)
@@ -174,24 +169,7 @@ public class Move : MonoBehaviour
             }
             renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.2f);
         }
-        Debug.Log("Stealth Activated!");
         yield return new WaitForSeconds(5f); // 5초간 스텔스 모드 유지
-        Debug.Log("Deactivating Stealth Mode!");
-        // Gradually make the plane visible again
-        //foreach (var renderer in renderers)
-        //{
-        //    Color originalColor = renderer.material.color;
-        //    float elapsedTime = 0f;
-        //    float duration = 0.5f; // 1초 동안 다시 보이게 됨
-        //    while (elapsedTime < duration)
-        //    {
-        //        elapsedTime += Time.deltaTime;
-        //        float alpha = Mathf.Lerp(0.2f, 1f, elapsedTime / duration);
-        //        renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-        //        yield return null;
-        //    }
-        //    renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
-        //}
         // Switch back to original material
         foreach (var renderer in renderers)
         {
@@ -200,6 +178,7 @@ public class Move : MonoBehaviour
                 renderer.material = originalMat;
             }
         }
+        GetComponent<Player>().isStealthMode = false;
     }
 }
 

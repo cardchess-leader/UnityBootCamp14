@@ -3,43 +3,99 @@ using UnityEngine;
 
 namespace Enemy
 {
+    // Require a Renderer component to ensure it's always available.
+    [RequireComponent(typeof(Renderer))]
     public class EnemyBehavior : MonoBehaviour
     {
+        [Header("Movement")]
         [SerializeField]
-        float speed;
+        private float speed = 5f;
         [SerializeField]
-        GameObject explosionEffect;
-        [SerializeField]
-        GameObject aimTarget;
-        GameObject player;
+        private float rotationSpeed = 2f;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [Header("Effects & Rewards")]
+        [SerializeField]
+        private GameObject explosionEffect;
+        [SerializeField]
+        private int experiencePoints = 10;
+
+        [Header("Targeting")]
+        [SerializeField]
+        private GameObject aimTarget;
+
+        // --- Cached References ---
+        private Transform _playerTransform;
+        public Player Target { get; private set; } // Property with a public getter and a private setter
+        private Renderer _renderer; // Cache the Renderer component
+        private MaterialPropertyBlock _propBlock; // For efficient color changes
+        private static readonly int ColorID = Shader.PropertyToID("_Color");
+
+        // Awake is called before Start, ideal for caching components on this GameObject.
+        private void Awake()
         {
-            // Find the player object by tag
-            player = GameObject.FindGameObjectWithTag("Player");
+            _renderer = GetComponent<Renderer>();
+            _propBlock = new MaterialPropertyBlock();
+        }
+
+        // Start is used for setup that might rely on other objects.
+        private void Start()
+        {
+            // Find the player ONCE and cache its components.
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                _playerTransform = playerObject.transform;
+                Target = playerObject.GetComponent<Player>();
+            }
+            else
+            {
+                // Disable this enemy if no player is found to avoid errors.
+                Debug.LogError("Player not found! Disabling enemy.", this);
+                enabled = false;
+                return;
+            }
+
             EnemySpawner.Instance.currEnemyCount++;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            // Rotate to face the player
-            Vector3 direction = (player.transform.position - transform.position).normalized;
+            // If the player reference is lost (e.g., destroyed), do nothing.
+            if (_playerTransform == null || Target.isStealthMode)
+            {
+                return;
+            }
+
+            // --- Movement Logic ---
+            // Rotate to face the player using the cached transform.
+            Vector3 direction = (_playerTransform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2f);
-            // Move forward constantly
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+
+            // Move forward constantly.
             transform.position += transform.forward * Time.deltaTime * speed;
         }
 
         private void OnDestroy()
         {
-            EnemySpawner.Instance.currEnemyCount--;
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
-            GameManager.Instance.AddExp(10);
+            // Use a null check for robustness when the game is closing.
+            if (EnemySpawner.Instance != null)
+            {
+                EnemySpawner.Instance.currEnemyCount--;
+            }
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AddExp(experiencePoints);
+            }
+
+            // It's highly recommended to use an Object Pool for effects like explosions.
+            // For now, Instantiate is fine, but pooling is the next optimization step.
+            if (explosionEffect != null)
+            {
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            }
         }
 
-        // When collided with another object, destroy itself
         private void OnCollisionEnter(Collision collision)
         {
             Destroy(gameObject);
@@ -47,25 +103,25 @@ namespace Enemy
 
         public void SetTargeted(bool isTargeted)
         {
-            // Change color to indicate targeting status
-            Renderer renderer = GetComponent<Renderer>();
-            if (isTargeted)
-                renderer.material.color = Color.red;
-            else
-                renderer.material.color = Color.white;
+            // Use the cached renderer and MaterialPropertyBlock for efficiency.
+            _renderer.GetPropertyBlock(_propBlock);
+            _propBlock.SetColor(ColorID, isTargeted ? Color.red : Color.white);
+            _renderer.SetPropertyBlock(_propBlock);
         }
 
-        public void ShowTarget() {
+        public void ShowTarget()
+        {
             StartCoroutine(ShowTargetCoroutine());
         }
 
-        IEnumerator ShowTargetCoroutine()
+        private IEnumerator ShowTargetCoroutine()
         {
-            aimTarget.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            aimTarget.SetActive(false);
+            if (aimTarget != null)
+            {
+                aimTarget.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+                aimTarget.SetActive(false);
+            }
         }
     }
 }
-
-
