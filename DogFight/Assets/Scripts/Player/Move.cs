@@ -65,9 +65,11 @@ public class Move : MonoBehaviour
         Inventory.Instance.UseSkill(2);
         thrustPower *= 3; // Double the thrust power
         maxSpeed *= 2; // Double the max speed
+        GetComponentInChildren<Propeller>()?.BoostRotationSpeed();
         yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
         thrustPower /= 3;
         maxSpeed /= 2;
+        GetComponentInChildren<Propeller>()?.ResetRotationSpeed();
         boostCoroutine = null;
     }
 

@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 // 32. Implement text animation and sound effects for the storyline and missions
 // 33. Implement Hellfire missile skill (Done)
 // 34. Incremental slot expansion system for skills (Not done)
+// 35. Implement Movement logic for the ally aircrafts.
+// 36. Implement shield mode (visual, feature)
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (Fixed)
@@ -108,10 +110,10 @@ public class GameManager : MonoBehaviour
 // 1. Hellfire missile barrage (Done)
 // 2. Speed boost (Done)
 // 3. EMP blast (Not done)
-// 4. Stealth mode (Not done)
+// 4. Stealth mode (Done)
 // 5. Shield (Not done)
 // 6. Call airstrike (Not done)
 // 7. Repair drone (Not done)
-// 8. Nuke launch (Not done)
+// 8. Nuke launch (Done)
 // 
 
