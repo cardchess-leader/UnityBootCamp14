@@ -23,6 +23,8 @@ public class Move : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Lift liftComponent;
+    [SerializeField]
+    float boostFactor = 3f;
     float thrustPower; // Current thrust power
 
     [SerializeField]
@@ -63,12 +65,12 @@ public class Move : MonoBehaviour
     IEnumerator BoostSpeed()
     {
         Inventory.Instance.UseSkill(2);
-        thrustPower *= 3; // Double the thrust power
-        maxSpeed *= 2; // Double the max speed
+        thrustPower *= boostFactor; // Double the thrust power
+        maxSpeed *= boostFactor; // Double the max speed
         GetComponentInChildren<Propeller>()?.BoostRotationSpeed();
         yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
-        thrustPower /= 3;
-        maxSpeed /= 2;
+        thrustPower /= boostFactor;
+        maxSpeed /= boostFactor;
         GetComponentInChildren<Propeller>()?.ResetRotationSpeed();
         boostCoroutine = null;
     }
