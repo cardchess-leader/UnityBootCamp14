@@ -91,13 +91,15 @@ public class GameManager : MonoBehaviour
 // 33. Implement Hellfire missile skill (Done)
 // 34. Incremental slot expansion system for skills (Not done)
 // 35. Implement Movement logic for the ally aircrafts.
-// 36. Implement shield mode (visual, feature)
+// 36. Implement shield mode (visual, feature
 
 // Bugfix
 // 1. When shooting bullets, sudden move when tilting sideways (Fixed)
 // 2. The auto-targetting is sometimes jammed. Why is this happening and how to fix this issue? (Fixed)
 // 3. At the start of the game, the radar system is blinking from the center.  (Fixed)
-// 4. Later, change the rendering order for the aiming reticle.
+// 4. Later, change the rendering order for the aiming reticle. 
+// 5. The paperplane booster effect is not showing
+// 6. The aim mouse pointer is too slow to follow the mouse position. (Fixed)
 
 // List of feature upgrades
 // 1. Missile launch ability

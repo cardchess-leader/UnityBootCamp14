@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
-using NUnit.Framework;
 
 public class Attack : MonoBehaviour
 {
@@ -55,9 +54,12 @@ public class Attack : MonoBehaviour
         // 왼쪽 마우스 키를 누르고 있을 때 기관총 발사
         if (Input.GetMouseButton(0))
         {
+            Debug.Log("Ammo is: " + currentAmmo);
+            Debug.Log("Checkpoint 1");
             // Give small fraction of cooltime to prevent too fast shooting
             if (Time.time - lastFireTime < fireCooldown) return;
             lastFireTime = Time.time;
+            Debug.Log("Checkpoint 2");
 
             // Bullet requires 1 ammo
             if (currentAmmo < 1) return;
@@ -67,6 +69,7 @@ public class Attack : MonoBehaviour
             FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
             FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
             UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
+            Debug.Log("Checkpoint 3");
         }
 
         // R 키를 누르면 재장전
@@ -121,6 +124,7 @@ public class Attack : MonoBehaviour
 
     Missile CreateMissile()
     {
+        Debug.Log("CreateMissile called");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 targetPoint = ray.GetPoint(200);
         Quaternion rotation = Quaternion.LookRotation((targetPoint - firePoint.transform.position).normalized);
@@ -129,6 +133,7 @@ public class Attack : MonoBehaviour
 
     private void FireMissile(EnemyBehavior target = null)
     {
+        Debug.Log("CreateMissile called");
         Missile missileComponent = CreateMissile();
 
         if (missileComponent != null)

@@ -39,21 +39,21 @@ public class Move : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the plane
-        StartCoroutine(EnableControlCoroutine());
-        StartCoroutine(InitThrust());
+        //StartCoroutine(EnableControlCoroutine());
+        //StartCoroutine(InitThrust());
     }
 
     private void Update()
     {
-        // If pressing space key, do something.
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (boostCoroutine != null)
-            {
-                return;
-            }
-            boostCoroutine = StartCoroutine(BoostSpeed());
-        }
+        //// If pressing space key, do something.
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (boostCoroutine != null)
+        //    {
+        //        return;
+        //    }
+        //    boostCoroutine = StartCoroutine(BoostSpeed());
+        //}
 
         // E 키를 누르면 스텔스 모드 5초간 활성화
         if (Input.GetKeyDown(KeyCode.E))
@@ -62,61 +62,61 @@ public class Move : MonoBehaviour
         }
     }
 
-    IEnumerator BoostSpeed()
-    {
-        Inventory.Instance.UseSkill(2);
-        thrustPower *= boostFactor; // Double the thrust power
-        maxSpeed *= boostFactor; // Double the max speed
-        GetComponentInChildren<Propeller>()?.BoostRotationSpeed();
-        yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
-        thrustPower /= boostFactor;
-        maxSpeed /= boostFactor;
-        GetComponentInChildren<Propeller>()?.ResetRotationSpeed();
-        boostCoroutine = null;
-    }
+    //IEnumerator BoostSpeed()
+    //{
+    //    Inventory.Instance.UseSkill(2);
+    //    thrustPower *= boostFactor; // Double the thrust power
+    //    maxSpeed *= boostFactor; // Double the max speed
+    //    GetComponentInChildren<Propeller>()?.BoostRotationSpeed();
+    //    yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
+    //    thrustPower /= boostFactor;
+    //    maxSpeed /= boostFactor;
+    //    GetComponentInChildren<Propeller>()?.ResetRotationSpeed();
+    //    boostCoroutine = null;
+    //}
 
     private void FixedUpdate()
     {
         // Apply thrust continuously
-        rb.AddForce(transform.forward * thrustPower * Time.fixedDeltaTime, ForceMode.Acceleration); // Apply forward force to the plane
-        timeSinceStart += Time.fixedDeltaTime; // Increment the timer
+        //rb.AddForce(transform.forward * thrustPower * Time.fixedDeltaTime, ForceMode.Acceleration); // Apply forward force to the plane
+        //timeSinceStart += Time.fixedDeltaTime; // Increment the timer
 
-        if (canControl)
-        {
-            HandlePlayerInput();
-        }
+        //if (canControl)
+        //{
+        //    HandlePlayerInput();
+        //}
 
-        LimitSpeed();
+        //LimitSpeed();
         UpdateUI();
     }
 
-    IEnumerator InitThrust()
-    {
-        while(true)
-        {
-            if (thrustPower >= maxThrustPower)
-            {
-                thrustPower = maxThrustPower;
-                yield break; // Exit the coroutine when max thrust power is reached
-            }
-            thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
-            yield return null;
-        }
-    }
+    //IEnumerator InitThrust()
+    //{
+    //    while(true)
+    //    {
+    //        if (thrustPower >= maxThrustPower)
+    //        {
+    //            thrustPower = maxThrustPower;
+    //            yield break; // Exit the coroutine when max thrust power is reached
+    //        }
+    //        thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
+    //        yield return null;
+    //    }
+    //}
 
-    private void HandlePlayerInput()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
-        float verticalInput = Input.GetAxis("Vertical"); // W/S or Up/Down arrows
+    //private void HandlePlayerInput()
+    //{
+    //    float horizontalInput = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
+    //    float verticalInput = Input.GetAxis("Vertical"); // W/S or Up/Down arrows
 
-        // Calculate rotation based on input
-        // Vertical input controls pitch (tilting up/down around the X-axis)
-        // Horizontal input controls yaw (turning left/right around the Y-axis)
-        Vector3 rotationInput = new Vector3(verticalInput, horizontalInput, 0);
+    //    // Calculate rotation based on input
+    //    // Vertical input controls pitch (tilting up/down around the X-axis)
+    //    // Horizontal input controls yaw (turning left/right around the Y-axis)
+    //    Vector3 rotationInput = new Vector3(verticalInput, horizontalInput, 0);
 
-        // Apply torque to rotate the plane
-        rb.AddRelativeTorque(rotationInput * rotationSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-    }
+    //    // Apply torque to rotate the plane
+    //    rb.AddRelativeTorque(rotationInput * rotationSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+    //}
 
     private void UpdateUI()
     {
@@ -130,23 +130,23 @@ public class Move : MonoBehaviour
         get { return rb.linearVelocity.magnitude; } // Return the magnitude of the velocity vector as speed
     }
 
-    IEnumerator EnableControlCoroutine()
-    {
-        yield return new WaitForSeconds(liftOffTiming); // Wait for the specified lift off timing
+    //IEnumerator EnableControlCoroutine()
+    //{
+    //    yield return new WaitForSeconds(liftOffTiming); // Wait for the specified lift off timing
 
-        // Enable player control & Start lifting
-        canControl = true;
-        liftComponent.enabled = true;
-    }
+    //    // Enable player control & Start lifting
+    //    canControl = true;
+    //    liftComponent.enabled = true;
+    //}
 
-    void LimitSpeed()
-    {
-        if (Speed > maxSpeed) // Assuming 100 m/s is the max speed
-        {
-            //rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
-            rb.AddForce(-transform.forward * thrustPower * 1.1f * Time.fixedDeltaTime, ForceMode.Acceleration);
-        }
-    }
+    //void LimitSpeed()
+    //{
+    //    if (Speed > maxSpeed) // Assuming 100 m/s is the max speed
+    //    {
+    //        //rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
+    //        rb.AddForce(-transform.forward * thrustPower * 1.1f * Time.fixedDeltaTime, ForceMode.Acceleration);
+    //    }
+    //}
 
     IEnumerator ActivateStealth()
     {
