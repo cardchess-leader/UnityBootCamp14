@@ -144,7 +144,6 @@ public class PaperPlanePhysics : BasePlaneController
             var timer = 0f;
             float startRoll = _currentAdditionalRoll + i * 360f * inputHandler.RollDirection;
 
-            Debug.Log(startRoll);
             float targetRoll = startRoll + (inputHandler.RollDirection > 0 ? -360f : 360f);
 
             while (timer < rollTime)

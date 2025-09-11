@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // What this script does: 
@@ -8,53 +9,22 @@ using UnityEngine;
 // 4. After 5 seconds, the player will have control over the plane's movement. (with move keys)
 public class Move : MonoBehaviour
 {
-    [SerializeField]
-    float initThrustPower = 1000;
-    [SerializeField]
-    float maxThrustPower = 5000;
-    [SerializeField]
-    float accelerationTime = 5f; // Time in seconds to reach max thrust power
-    [SerializeField]
-    float liftOffTiming = 5f; // Lift off after this many seconds
-    [SerializeField]
-    float maxSpeed = 100f; // Maximum speed of the plane
-    [SerializeField]
-    private float rotationSpeed = 50f; // Speed of rotation for turning and pitching
     Rigidbody rb;
-    [SerializeField]
-    Lift liftComponent;
-    [SerializeField]
-    float boostFactor = 3f;
-    float thrustPower; // Current thrust power
-
-    [SerializeField]
     Material originalMat;
     [SerializeField]
     Material stealthMat;
 
     float timeSinceStart = 0f; // Timer to track how long the plane has been moving
-    private bool canControl = false; // Flag to check if the player can control the plane
-    Coroutine boostCoroutine;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the plane
-        //StartCoroutine(EnableControlCoroutine());
-        //StartCoroutine(InitThrust());
+        // Set the original Material to originalMat for child called Plane from its skinned mesh renderer
+        originalMat = GetComponentInChildren<Renderer>().material;
     }
 
     private void Update()
     {
-        //// If pressing space key, do something.
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (boostCoroutine != null)
-        //    {
-        //        return;
-        //    }
-        //    boostCoroutine = StartCoroutine(BoostSpeed());
-        //}
-
         // E 키를 누르면 스텔스 모드 5초간 활성화
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -62,61 +32,12 @@ public class Move : MonoBehaviour
         }
     }
 
-    //IEnumerator BoostSpeed()
-    //{
-    //    Inventory.Instance.UseSkill(2);
-    //    thrustPower *= boostFactor; // Double the thrust power
-    //    maxSpeed *= boostFactor; // Double the max speed
-    //    GetComponentInChildren<Propeller>()?.BoostRotationSpeed();
-    //    yield return new WaitForSeconds(3f); // Boost lasts for 3 seconds
-    //    thrustPower /= boostFactor;
-    //    maxSpeed /= boostFactor;
-    //    GetComponentInChildren<Propeller>()?.ResetRotationSpeed();
-    //    boostCoroutine = null;
-    //}
-
     private void FixedUpdate()
     {
         // Apply thrust continuously
-        //rb.AddForce(transform.forward * thrustPower * Time.fixedDeltaTime, ForceMode.Acceleration); // Apply forward force to the plane
-        //timeSinceStart += Time.fixedDeltaTime; // Increment the timer
-
-        //if (canControl)
-        //{
-        //    HandlePlayerInput();
-        //}
-
-        //LimitSpeed();
+        timeSinceStart += Time.fixedDeltaTime; // Increment the timer
         UpdateUI();
     }
-
-    //IEnumerator InitThrust()
-    //{
-    //    while(true)
-    //    {
-    //        if (thrustPower >= maxThrustPower)
-    //        {
-    //            thrustPower = maxThrustPower;
-    //            yield break; // Exit the coroutine when max thrust power is reached
-    //        }
-    //        thrustPower = Mathf.Lerp(initThrustPower, maxThrustPower, timeSinceStart / accelerationTime);
-    //        yield return null;
-    //    }
-    //}
-
-    //private void HandlePlayerInput()
-    //{
-    //    float horizontalInput = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
-    //    float verticalInput = Input.GetAxis("Vertical"); // W/S or Up/Down arrows
-
-    //    // Calculate rotation based on input
-    //    // Vertical input controls pitch (tilting up/down around the X-axis)
-    //    // Horizontal input controls yaw (turning left/right around the Y-axis)
-    //    Vector3 rotationInput = new Vector3(verticalInput, horizontalInput, 0);
-
-    //    // Apply torque to rotate the plane
-    //    rb.AddRelativeTorque(rotationInput * rotationSpeed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-    //}
 
     private void UpdateUI()
     {
@@ -130,59 +51,154 @@ public class Move : MonoBehaviour
         get { return rb.linearVelocity.magnitude; } // Return the magnitude of the velocity vector as speed
     }
 
-    //IEnumerator EnableControlCoroutine()
-    //{
-    //    yield return new WaitForSeconds(liftOffTiming); // Wait for the specified lift off timing
-
-    //    // Enable player control & Start lifting
-    //    canControl = true;
-    //    liftComponent.enabled = true;
-    //}
-
-    //void LimitSpeed()
-    //{
-    //    if (Speed > maxSpeed) // Assuming 100 m/s is the max speed
+    //    IEnumerator ActivateStealth()
     //    {
-    //        //rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed; // Cap the speed at 100 m/s
-    //        rb.AddForce(-transform.forward * thrustPower * 1.1f * Time.fixedDeltaTime, ForceMode.Acceleration);
+    //        Debug.Log("Activate Stealth");
+    //        Inventory.Instance.UseSkill(4);
+    //        GetComponent<Player>().isStealthMode = true;
+    //        yield return new WaitForSeconds(0.1f); // 약간의 딜레이
+
+    //        // Switch to stealth material and store original colors
+    //        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+    //        Color[] originalColors = new Color[renderers.Length];
+    //        Material[] originalMaterials = new Material[renderers.Length];
+
+    //        for (int i = 0; i < renderers.Length; i++)
+    //        {
+    //            var renderer = renderers[i];
+
+    //            // Skip TrailRenderer or renderers with materials that don't support _Color
+    //            if (renderer is TrailRenderer || !renderer.material.HasProperty("_Color"))
+    //            {
+    //                originalColors[i] = Color.white; // Default color for unsupported materials
+    //                originalMaterials[i] = renderer.material;
+    //                continue;
+    //            }
+
+    //            // Store original color and material before changing
+    //            originalColors[i] = renderer.material.color;
+    //            originalMaterials[i] = renderer.material;
+
+    //            // Switch to stealth material
+    //            if (stealthMat != null)
+    //            {
+    //                renderer.material = stealthMat;
+    //            }
+
+    //            // Start transparency transition (fade to transparent)
+    //            float elapsedTime = 0f;
+    //            float duration = 1f; // 1초 동안 투명해짐
+    //            Color stealthColor = renderer.material.color;
+
+    //            while (elapsedTime < duration)
+    //            {
+    //                elapsedTime += Time.deltaTime;
+    //                float alpha = Mathf.Lerp(1f, 0.2f, elapsedTime / duration);
+    //                renderer.material.color = new Color(stealthColor.r, stealthColor.g, stealthColor.b, alpha);
+    //                yield return null;
+    //            }
+
+    //            // Ensure final transparency
+    //            renderer.material.color = new Color(stealthColor.r, stealthColor.g, stealthColor.b, 0.2f);
+    //        }
+
+    //        yield return new WaitForSeconds(5f); // 5초간 스텔스 모드 유지
+
+    //        // Switch back to original material with fade-in transition
+    //        for (int i = 0; i < renderers.Length; i++)
+    //        {
+    //            var renderer = renderers[i];
+
+    //            // Skip TrailRenderer or renderers with materials that don't support _Color
+    //            if (renderer is TrailRenderer || !originalMaterials[i].HasProperty("_Color"))
+    //            {
+    //                // Just restore the original material without color changes
+    //                renderer.material = originalMaterials[i];
+    //                continue;
+    //            }
+
+    //            // Switch back to original material
+    //            renderer.material = originalMaterials[i];
+
+    //            // Restore transparency transition (fade back to opaque)
+    //            float elapsedTime = 0f;
+    //            float duration = 1f; // 1초 동안 불투명해짐
+    //            Color targetColor = originalColors[i];
+
+    //            while (elapsedTime < duration)
+    //            {
+    //                elapsedTime += Time.deltaTime;
+    //                float alpha = Mathf.Lerp(0.2f, 1f, elapsedTime / duration);
+    //                renderer.material.color = new Color(targetColor.r, targetColor.g, targetColor.b, alpha);
+    //                yield return null;
+    //            }
+
+    //            // Ensure final opacity with original color
+    //            renderer.material.color = targetColor;
+    //        }
+
+    //        GetComponent<Player>().isStealthMode = false;
+    //        Debug.Log("Deactivate Stealth");
     //    }
     //}
 
     IEnumerator ActivateStealth()
     {
+        Debug.Log("Activate Stealth");
         Inventory.Instance.UseSkill(4);
-        GetComponent<Player>().isStealthMode = true;
-        yield return new WaitForSeconds(0.1f); // 약간의 딜레이
-        // Switch to stealth material
+        var player = GetComponent<Player>();
+        player.isStealthMode = true;
+
+        // Collect all renderers except TrailRenderer
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        foreach (var renderer in renderers)
+        var originalColors = new Dictionary<Renderer, Color>();
+        var originalMaterials = new Dictionary<Renderer, Material>();
+
+        foreach (var r in renderers)
         {
-            if (stealthMat != null)
-            {
-                renderer.material = stealthMat;
-            }
-            Color originalColor = renderer.material.color;
-            float elapsedTime = 0f;
-            float duration = 1f; // 1초 동안 투명해짐
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0.2f, elapsedTime / duration);
-                renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-                yield return null;
-            }
-            renderer.material.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.2f);
+            if (r is TrailRenderer || !r.material.HasProperty("_Color"))
+                continue;
+
+            originalColors[r] = r.material.color;
+            originalMaterials[r] = r.material;
         }
-        yield return new WaitForSeconds(5f); // 5초간 스텔스 모드 유지
-        // Switch back to original material
-        foreach (var renderer in renderers)
+
+        // Fade out
+        yield return Fade(renderers, 1f, 0.2f, 1f);
+
+        // Hold for 5 seconds
+        yield return new WaitForSeconds(5f);
+
+        // Fade in
+        yield return Fade(renderers, 0.2f, 1f, 1f, originalColors);
+
+        // Restore original materials
+        foreach (var kv in originalMaterials)
+            kv.Key.material = kv.Value;
+
+        player.isStealthMode = false;
+        Debug.Log("Deactivate Stealth");
+    }
+
+    IEnumerator Fade(Renderer[] renderers, float from, float to, float duration,
+                     Dictionary<Renderer, Color> restoreColors = null)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
         {
-            if (originalMat != null)
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(from, to, elapsed / duration);
+
+            foreach (var r in renderers)
             {
-                renderer.material = originalMat;
+                if (r is TrailRenderer || !r.material.HasProperty("_Color")) continue;
+
+                Color baseColor = restoreColors != null ? restoreColors[r] : r.material.color;
+                r.material.color = new Color(baseColor.r, baseColor.g, baseColor.b, alpha);
             }
+
+            yield return null;
         }
-        GetComponent<Player>().isStealthMode = false;
     }
 }
 

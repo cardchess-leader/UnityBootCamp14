@@ -64,7 +64,6 @@ public class KeyboardInputHandler : BaseInputHandler
         }
 
         IsBoosting = Input.GetKey(boostKey);
-        Debug.Log("Input IsBoosting: " + IsBoosting);
 
         BackFlipInput = Input.GetKeyDown(KeyCode.F);
     }

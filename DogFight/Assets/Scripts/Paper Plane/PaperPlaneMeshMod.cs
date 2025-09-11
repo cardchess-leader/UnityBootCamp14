@@ -32,7 +32,6 @@ public class PaperPlaneMeshMod : MonoBehaviour
         meshFilter = GetComponent<SkinnedMeshRenderer>();
         if (meshFilter == null)
         {
-            Debug.LogError("MeshFilter not found!");
             enabled = false;
             return;
         }

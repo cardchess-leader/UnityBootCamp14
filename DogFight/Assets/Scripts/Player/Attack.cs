@@ -10,7 +10,9 @@ public class Attack : MonoBehaviour
     [SerializeField]
     GameObject nukePrefab;
     [SerializeField]
-    GameObject firePoint;
+    GameObject machineGunPoint;
+    [SerializeField]
+    GameObject missileLauncherPoint;
     [SerializeField]
     GameObject nukeDropPoint;
     [SerializeField]
@@ -66,8 +68,8 @@ public class Attack : MonoBehaviour
             currentAmmo -= 1;
             // Double barrel gun fire using BulletPool
             // Fire from multiple points
-            FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
-            FireBullet(firePoint.transform.position + new Vector3(-4f, 0, 0.1f));
+            //FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
+            FireBullet(machineGunPoint.transform.position);
             UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
             Debug.Log("Checkpoint 3");
         }
@@ -124,16 +126,14 @@ public class Attack : MonoBehaviour
 
     Missile CreateMissile()
     {
-        Debug.Log("CreateMissile called");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 targetPoint = ray.GetPoint(200);
-        Quaternion rotation = Quaternion.LookRotation((targetPoint - firePoint.transform.position).normalized);
-        return Instantiate(missilePrefab, firePoint.transform.position + new Vector3(0, 0, 5f), rotation).GetComponent<Missile>();
+        Quaternion rotation = Quaternion.LookRotation((targetPoint - machineGunPoint.transform.position).normalized);
+        return Instantiate(missilePrefab, missileLauncherPoint.transform.position, rotation).GetComponent<Missile>();
     }
 
     private void FireMissile(EnemyBehavior target = null)
     {
-        Debug.Log("CreateMissile called");
         Missile missileComponent = CreateMissile();
 
         if (missileComponent != null)
