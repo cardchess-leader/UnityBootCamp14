@@ -6,11 +6,8 @@ public class GameManager : MonoBehaviour
 {
     // Use singleton pattern
     public static GameManager Instance { get; private set; }
-    public float liftUpBelowThisAltitude = 50f;
     [SerializeField]
     List<Level> levelList;
-    [SerializeField]
-    public float timeScale = 0.5f;
     int exp = 0;
     int level = 0;
 
@@ -31,11 +28,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UIController.Instance.UpdateLevelText(level, exp, levelList[level].expToNextLevel);
-    }
-
-    private void Update()
-    {
-        Time.timeScale = timeScale;
     }
 
     public float GetAltitude(GameObject target)

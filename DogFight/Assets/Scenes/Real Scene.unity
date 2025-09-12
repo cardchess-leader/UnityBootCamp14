@@ -2312,7 +2312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9f1113e02e6d640b47c7812f8bf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftUpBelowThisAltitude: 50
   levelList:
   - {fileID: 11400000, guid: e95b114d36928b442a7d0db627107ca1, type: 2}
   - {fileID: 11400000, guid: f619774f9d598194490935c3f823bfdf, type: 2}
@@ -2320,7 +2319,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 476aadd2b2cbdcf4d9e05f23ed2bb234, type: 2}
   - {fileID: 11400000, guid: 3f7cc4488a9e37c4487ec0e856496c9d, type: 2}
   - {fileID: 11400000, guid: 3c80c62c9cb35ba4286248d42a0bbfbf, type: 2}
-  timeScale: 1
 --- !u!4 &147801997
 Transform:
   m_ObjectHideFlags: 0
@@ -8780,7 +8778,7 @@ MonoBehaviour:
   currEnemyCount: 0
   minXYZ: {x: -100, y: 10, z: -100}
   maxXYZ: {x: 100, y: 200, z: 100}
-  GameObject: {fileID: 8461017542944201390, guid: de1608f1d592a0a448da6b78c48bed1b, type: 3}
+  GameObject: {fileID: 6872361449544733044, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
   spawnInterval: 1
 --- !u!4 &747390405
 Transform:

@@ -20,14 +20,14 @@ public class Lift : MonoBehaviour
 
     void ApplyZoneLift()
     {
-        var liftDirection = new Vector3(0, 1, 0);
-        if (transform.position.y < GameManager.Instance.liftUpBelowThisAltitude)
-        {
-            rb.AddForce(liftDirection * liftForce * Time.deltaTime, ForceMode.Force);
-        } else
-        {
-            // Add default gravityscale to offset the gravity effect (by that much fraction)
-            rb.AddForce(liftDirection * counterGravityForce, ForceMode.Force);
-        }
+        //var liftDirection = new Vector3(0, 1, 0);
+        //if (transform.position.y < GameManager.Instance.liftUpBelowThisAltitude)
+        //{
+        //    rb.AddForce(liftDirection * liftForce * Time.deltaTime, ForceMode.Force);
+        //} else
+        //{
+        //    // Add default gravityscale to offset the gravity effect (by that much fraction)
+        //    rb.AddForce(liftDirection * counterGravityForce, ForceMode.Force);
+        //}
     }
 }

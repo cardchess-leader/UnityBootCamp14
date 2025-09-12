@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Enemy
 {
     // Require a Renderer component to ensure it's always available.
-    [RequireComponent(typeof(Renderer))]
+    //[RequireComponent(typeof(Renderer))]
     public class EnemyBehavior : MonoBehaviour
     {
         [Header("Movement")]
@@ -23,9 +23,13 @@ namespace Enemy
         [SerializeField]
         private GameObject aimTarget;
 
+        //[SerializeField]
+        //Renderer skinnedMeshRenderer;
+
         // --- Cached References ---
         private Transform _playerTransform;
         public Player Target { get; private set; } // Property with a public getter and a private setter
+        [SerializeField]
         private Renderer _renderer; // Cache the Renderer component
         private MaterialPropertyBlock _propBlock; // For efficient color changes
         private static readonly int ColorID = Shader.PropertyToID("_Color");
@@ -33,7 +37,7 @@ namespace Enemy
         // Awake is called before Start, ideal for caching components on this GameObject.
         private void Awake()
         {
-            _renderer = GetComponent<Renderer>();
+            //_renderer = GetComponent<Renderer>();
             _propBlock = new MaterialPropertyBlock();
         }
 

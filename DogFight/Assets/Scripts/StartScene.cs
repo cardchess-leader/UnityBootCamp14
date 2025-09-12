@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class StartScene : MonoBehaviour
 {
+    [SerializeField]
+    float timeScale = 0.1f;
     private void Start()
     {
-        Time.timeScale = 0.1f; // Ensure normal time scale at the start
+        Time.timeScale = timeScale; // Ensure normal time scale at the start
     }
 
     private void OnDestroy()
