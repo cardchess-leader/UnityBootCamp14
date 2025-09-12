@@ -105,8 +105,6 @@ public class GameManager : MonoBehaviour
 // 1. Missile launch ability
 // 2. Rear view camera
 // 3. Radar system
-// 4. 
-
 
 // List of Skills to implement
 // 1. Hellfire missile barrage (Done)
