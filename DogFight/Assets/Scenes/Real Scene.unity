@@ -24548,6 +24548,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 644391250801338114, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 452520226}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: rollSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: enableTapRoll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: boostMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: enableLateralForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: lateralForceAmount
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2777805616800742467, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -24604,6 +24628,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6786406694875603322, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7460416537014644176, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       propertyPath: m_Name
       value: Player Paper Plane
@@ -24620,14 +24648,10 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: c365b9bb4c597cc4ea7dd2ae4b65201d, type: 2}
-    m_RemovedComponents:
-    - {fileID: 2777805616800742467, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7460416537014644176, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8286973538683158865}
     - targetCorrespondingSourceObject: {fileID: 151825008407469085, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8843691872096248379}
@@ -24886,19 +24910,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 412664cea6b659d4980138f13d267d0f, type: 3}
---- !u!114 &8286973538683158865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6693580451099171229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179ac99d05af9fe47ba191df3a8c6f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &8843691872096248379
 MonoBehaviour:
   m_ObjectHideFlags: 0

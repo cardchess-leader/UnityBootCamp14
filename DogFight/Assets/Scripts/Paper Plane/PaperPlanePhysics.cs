@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PaperPlanePhysics : BasePlaneController
 {
-
     private int rollTapIndex;
     private float rollTapTimer;
 

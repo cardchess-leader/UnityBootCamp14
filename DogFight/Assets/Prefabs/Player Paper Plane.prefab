@@ -677,10 +677,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5691513282659923864}
   - component: {fileID: 8193640830965508666}
-  - component: {fileID: 2777805616800742467}
   - component: {fileID: 7516526368007496674}
   m_Layer: 7
-  m_Name: Camera
+  m_Name: Rear View Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,14 +751,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2777805616800742467
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4708767337084514103}
-  m_Enabled: 1
 --- !u!114 &7516526368007496674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,6 +1128,8 @@ GameObject:
   - component: {fileID: 992489015702451463}
   - component: {fileID: 7568630854785393792}
   - component: {fileID: 4813388088364007525}
+  - component: {fileID: 8833140351170116907}
+  - component: {fileID: 644391250801338114}
   m_Layer: 7
   m_Name: Player Paper Plane
   m_TagString: Player
@@ -1324,6 +1317,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20e9de63d8b3ec43bdde249a2465338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8833140351170116907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460416537014644176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179ac99d05af9fe47ba191df3a8c6f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!114 &644391250801338114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460416537014644176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fd62c9e44dfdc488b28a39bb6ccc94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 0}
+  usePOVComponent: 1
+  lookTarget: {fileID: 0}
+  lookTargetDistance: 10
+  maxYaw: 30
+  maxPitch: 15
+  smoothTime: 0.08
+  deadzone: 0.03
+  clampRadius: 1
 --- !u!1 &7464124297986652753
 GameObject:
   m_ObjectHideFlags: 0
