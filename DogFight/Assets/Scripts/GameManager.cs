@@ -119,3 +119,8 @@ public class GameManager : MonoBehaviour
 // 8. Nuke launch (Done)
 // 
 
+
+// View slight change with mouse position movement
+// Bullet disappearing too soon 
+// Rear view camera not working
+// Nuke cannot be seen

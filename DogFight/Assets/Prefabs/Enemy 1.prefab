@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2684128550893530251}
@@ -253,7 +253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  rotationSpeed: 2
   explosionEffect: {fileID: 8036918637616662261, guid: e27b990319b72eb44878275d8fcc7fd3, type: 3}
+  experiencePoints: 10
   aimTarget: {fileID: 8279843737029094516}
 --- !u!114 &7820155818164706408
 MonoBehaviour:

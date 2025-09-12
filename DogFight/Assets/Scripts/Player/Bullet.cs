@@ -9,7 +9,8 @@ public class Bullet : MonoBehaviour
     // Include a explosion effect on impact in the future
     [SerializeField]
     GameObject explosionEffect;
-    
+
+    [SerializeField]
     private float lifetime = 5f;
     private float currentLifetime;
     private PooledBullet pooledBullet;
@@ -60,6 +61,7 @@ public class Bullet : MonoBehaviour
 
     private void ReturnToPool()
     {
+        Debug.Log("Returning bullet to pool");
         if (pooledBullet != null)
         {
             pooledBullet.ReturnToPool();

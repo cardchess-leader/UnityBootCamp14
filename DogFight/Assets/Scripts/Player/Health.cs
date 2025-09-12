@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
     public static Health Instance { get; private set; }
     private void Awake()
         {
+        Debug.Log("Health Awake");
         if (Instance == null)
         {
             Instance = this;
@@ -32,6 +33,7 @@ public class Health : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collided with " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(50);

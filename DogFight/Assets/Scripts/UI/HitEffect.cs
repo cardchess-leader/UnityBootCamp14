@@ -21,6 +21,7 @@ public class HitEffect : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("HitEffect Awake");
         // Ensure that there is only one instance of HitEffect
         if (Instance == null)
         {
@@ -44,6 +45,7 @@ public class HitEffect : MonoBehaviour
     // damage: amount taken now; maxHealth: player's max (or pass the biggest expected hit).
     public void OnDamaged(float damage, float maxHealth)
     {
+        Debug.Log("OnDamaged Called");
         if (overlay == null || maxHealth <= 0f) return;
 
         float normalizedDmg = damage / maxHealth;

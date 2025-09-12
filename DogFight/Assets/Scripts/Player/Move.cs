@@ -10,17 +10,10 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     Rigidbody rb;
-    Material originalMat;
-    [SerializeField]
-    Material stealthMat;
-
-    float timeSinceStart = 0f; // Timer to track how long the plane has been moving
 
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the plane
-        // Set the original Material to originalMat for child called Plane from its skinned mesh renderer
-        originalMat = GetComponentInChildren<Renderer>().material;
     }
 
     private void Update()
@@ -34,8 +27,6 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Apply thrust continuously
-        timeSinceStart += Time.fixedDeltaTime; // Increment the timer
         UpdateUI();
     }
 
@@ -51,100 +42,8 @@ public class Move : MonoBehaviour
         get { return rb.linearVelocity.magnitude; } // Return the magnitude of the velocity vector as speed
     }
 
-    //    IEnumerator ActivateStealth()
-    //    {
-    //        Debug.Log("Activate Stealth");
-    //        Inventory.Instance.UseSkill(4);
-    //        GetComponent<Player>().isStealthMode = true;
-    //        yield return new WaitForSeconds(0.1f); // 약간의 딜레이
-
-    //        // Switch to stealth material and store original colors
-    //        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-    //        Color[] originalColors = new Color[renderers.Length];
-    //        Material[] originalMaterials = new Material[renderers.Length];
-
-    //        for (int i = 0; i < renderers.Length; i++)
-    //        {
-    //            var renderer = renderers[i];
-
-    //            // Skip TrailRenderer or renderers with materials that don't support _Color
-    //            if (renderer is TrailRenderer || !renderer.material.HasProperty("_Color"))
-    //            {
-    //                originalColors[i] = Color.white; // Default color for unsupported materials
-    //                originalMaterials[i] = renderer.material;
-    //                continue;
-    //            }
-
-    //            // Store original color and material before changing
-    //            originalColors[i] = renderer.material.color;
-    //            originalMaterials[i] = renderer.material;
-
-    //            // Switch to stealth material
-    //            if (stealthMat != null)
-    //            {
-    //                renderer.material = stealthMat;
-    //            }
-
-    //            // Start transparency transition (fade to transparent)
-    //            float elapsedTime = 0f;
-    //            float duration = 1f; // 1초 동안 투명해짐
-    //            Color stealthColor = renderer.material.color;
-
-    //            while (elapsedTime < duration)
-    //            {
-    //                elapsedTime += Time.deltaTime;
-    //                float alpha = Mathf.Lerp(1f, 0.2f, elapsedTime / duration);
-    //                renderer.material.color = new Color(stealthColor.r, stealthColor.g, stealthColor.b, alpha);
-    //                yield return null;
-    //            }
-
-    //            // Ensure final transparency
-    //            renderer.material.color = new Color(stealthColor.r, stealthColor.g, stealthColor.b, 0.2f);
-    //        }
-
-    //        yield return new WaitForSeconds(5f); // 5초간 스텔스 모드 유지
-
-    //        // Switch back to original material with fade-in transition
-    //        for (int i = 0; i < renderers.Length; i++)
-    //        {
-    //            var renderer = renderers[i];
-
-    //            // Skip TrailRenderer or renderers with materials that don't support _Color
-    //            if (renderer is TrailRenderer || !originalMaterials[i].HasProperty("_Color"))
-    //            {
-    //                // Just restore the original material without color changes
-    //                renderer.material = originalMaterials[i];
-    //                continue;
-    //            }
-
-    //            // Switch back to original material
-    //            renderer.material = originalMaterials[i];
-
-    //            // Restore transparency transition (fade back to opaque)
-    //            float elapsedTime = 0f;
-    //            float duration = 1f; // 1초 동안 불투명해짐
-    //            Color targetColor = originalColors[i];
-
-    //            while (elapsedTime < duration)
-    //            {
-    //                elapsedTime += Time.deltaTime;
-    //                float alpha = Mathf.Lerp(0.2f, 1f, elapsedTime / duration);
-    //                renderer.material.color = new Color(targetColor.r, targetColor.g, targetColor.b, alpha);
-    //                yield return null;
-    //            }
-
-    //            // Ensure final opacity with original color
-    //            renderer.material.color = targetColor;
-    //        }
-
-    //        GetComponent<Player>().isStealthMode = false;
-    //        Debug.Log("Deactivate Stealth");
-    //    }
-    //}
-
     IEnumerator ActivateStealth()
     {
-        Debug.Log("Activate Stealth");
         Inventory.Instance.UseSkill(4);
         var player = GetComponent<Player>();
         player.isStealthMode = true;
@@ -177,7 +76,6 @@ public class Move : MonoBehaviour
             kv.Key.material = kv.Value;
 
         player.isStealthMode = false;
-        Debug.Log("Deactivate Stealth");
     }
 
     IEnumerator Fade(Renderer[] renderers, float from, float to, float duration,
