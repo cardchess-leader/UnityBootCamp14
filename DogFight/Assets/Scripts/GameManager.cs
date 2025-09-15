@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 // 
 
 
-// View slight change with mouse position movement
+// View slight change with mouse position movement (Done)
 // Bullet disappearing too soon 
-// Rear view camera not working
+// Rear view camera not working (Fixed)
 // Nuke cannot be seen

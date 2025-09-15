@@ -8,6 +8,7 @@ public class KeyboardInputHandler : BaseInputHandler
 
     [SerializeField] private KeyCode thrustKeyLeft = KeyCode.Q;
     [SerializeField] private KeyCode thrustKeyRight = KeyCode.E;
+    [SerializeField] private KeyCode povToggleKey = KeyCode.Tab;
 
     // 더블 클릭 감지를 위한 변수들
     [SerializeField] private float doubleClickTime = 0.3f; // 더블 클릭 간격 (초)
@@ -34,7 +35,6 @@ public class KeyboardInputHandler : BaseInputHandler
 
     public override bool IsLeftThrustDown { get; set; }
     public override bool BackFlipInput { get; set; }
-
     public override void UpdateInputs()
     {
         ControlInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -65,6 +65,11 @@ public class KeyboardInputHandler : BaseInputHandler
         else
         {
             RollInput = 0f;
+        }
+
+        if (Input.GetKeyDown(povToggleKey))
+        {
+            FindFirstObjectByType<CameraController>()?.TogglePOVMode();
         }
 
         // 좌/우 수평 축 입력 더블 클릭 감지

@@ -29,6 +29,7 @@ public class Attack : MonoBehaviour
     // 자동 타겟팅 참조
     private AutoTargeting autoTargeting;
 
+    Camera GetCamera() => FindFirstObjectByType<CameraController>().GetCamera();
     private void Start()
     {
         currentAmmo = maxAmmo;
@@ -56,13 +57,9 @@ public class Attack : MonoBehaviour
         // 왼쪽 마우스 키를 누르고 있을 때 기관총 발사
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("Ammo is: " + currentAmmo);
-            Debug.Log("Checkpoint 1");
             // Give small fraction of cooltime to prevent too fast shooting
             if (Time.time - lastFireTime < fireCooldown) return;
             lastFireTime = Time.time;
-            Debug.Log("Checkpoint 2");
-
             // Bullet requires 1 ammo
             if (currentAmmo < 1) return;
             currentAmmo -= 1;
@@ -71,7 +68,6 @@ public class Attack : MonoBehaviour
             //FireBullet(firePoint.transform.position + new Vector3(4f, 0, 0.3f));
             FireBullet(machineGunPoint.transform.position);
             UIController.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
-            Debug.Log("Checkpoint 3");
         }
 
         // R 키를 누르면 재장전
@@ -126,7 +122,7 @@ public class Attack : MonoBehaviour
 
     Missile CreateMissile()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = GetCamera().ScreenPointToRay(Input.mousePosition);
         Vector3 targetPoint = ray.GetPoint(200);
         Quaternion rotation = Quaternion.LookRotation((targetPoint - machineGunPoint.transform.position).normalized);
         return Instantiate(missilePrefab, missileLauncherPoint.transform.position, rotation).GetComponent<Missile>();
@@ -183,14 +179,14 @@ public class Attack : MonoBehaviour
                     }
                     else
                     {
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        Ray ray = GetCamera().GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                         Vector3 targetPoint = ray.GetPoint(200);
                         targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);
                     }
                 }
                 else
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Ray ray = GetCamera().ScreenPointToRay(Input.mousePosition);
                     Vector3 targetPoint = ray.GetPoint(200);
                     targetRotation = Quaternion.LookRotation((targetPoint - position).normalized);
                 }

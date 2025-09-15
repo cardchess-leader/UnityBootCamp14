@@ -9,22 +9,16 @@ public class AutoTargeting : MonoBehaviour
     [SerializeField] private float snapDistanceThreshold = 100f; // 스냅할 거리 임계값 (픽셀)
     [SerializeField] private LayerMask enemyLayerMask = -1; // 적 레이어 마스크
     
-    private Camera playerCamera;
     private EnemyBehavior currentTarget;
     private bool isTargeting = false;
     private bool lockMode = false;
+    CameraController cameraController;
 
     CustomCursor customCursor;
 
     private void Start()
     {
-        // 플레이어 카메라 찾기
-        playerCamera = Camera.main;
-        if (playerCamera == null)
-        {
-            playerCamera = FindFirstObjectByType<Camera>();
-        }
-
+        cameraController = FindFirstObjectByType<CameraController>();
         customCursor = CustomCursor.Instance;
     }
 
@@ -87,7 +81,7 @@ public class AutoTargeting : MonoBehaviour
     {
         if (customCursor != null && enemy != null)
         {
-            Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
+            Vector3 enemyScreenPos = cameraController.GetCamera().WorldToScreenPoint(enemy.transform.position);
             customCursor.MoveTo(enemyScreenPos);
         }
     }
@@ -141,7 +135,7 @@ public class AutoTargeting : MonoBehaviour
     private float CalculateScreenDistance(Vector3 mouseScreenPos, EnemyBehavior enemy)
     {
         // 적의 월드 좌표를 스크린 좌표로 변환
-        Vector3 enemyScreenPos = playerCamera.WorldToScreenPoint(enemy.transform.position);
+        Vector3 enemyScreenPos = cameraController.GetCamera().WorldToScreenPoint(enemy.transform.position);
         
         // 마우스 위치와 적의 스크린 위치 사이의 거리 계산 (픽셀 단위)
         float distance = Vector2.Distance(mouseScreenPos, enemyScreenPos);
