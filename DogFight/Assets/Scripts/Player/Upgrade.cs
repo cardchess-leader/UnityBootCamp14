@@ -1,18 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+public enum UpgradeType
+{
+    Armor,
+    Speed,
+    Attack,
+    Ammo
+}
 
 public class Upgrade : MonoBehaviour
 {
     // Singleton instance
     public static Upgrade Instance { get; private set; }
 
-    Dictionary<string, int> upgradeStats = new Dictionary<string, int>()
+    Dictionary<UpgradeType, int> upgradeStats = new Dictionary<UpgradeType, int>()
     {
-        {"Armor", 0},
-        {"Speed", 0},
-        {"Attack", 0},
-        {"Ammo", 0},
+        {UpgradeType.Armor, 0},
+        {UpgradeType.Speed, 0},
+        {UpgradeType.Attack, 0},
+        {UpgradeType.Ammo, 0},
     };
+
+    // Add unity event for OnLevelUp
+    public UnityEvent OnLevelUpEvent;
+
+    public int GetStat(UpgradeType key)
+    {
+        if (upgradeStats.ContainsKey(key))
+        {
+            return upgradeStats[key];
+        }
+        return 0;
+    }
 
     private void Awake()
     {
@@ -27,39 +48,24 @@ public class Upgrade : MonoBehaviour
         }
     }
 
-    int remainingPoints = 0;
-    
-    public bool SpendPoints(string key)
+    [SerializeField]
+    int remainingPoints = 5;
+
+    public bool RemainingPointsExist() => remainingPoints > 0;
+
+    public void SpendPoints(UpgradeType key)
     {
         // increment the stat with the given key
         if (upgradeStats.ContainsKey(key))
         {
             upgradeStats[key]++;
             remainingPoints--;
-            OnRemainingPointsChanged();
         }
-        if (remainingPoints == 0) 
-            return false;
-        return true;
     }
 
-    void OnRemainingPointsChanged()
+    public void OnLevelUp()
     {
-        // Notify UI or other systems about the change in remaining points
-        Debug.Log($"Remaining upgrade points: {remainingPoints}");
-    }
-
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        remainingPoints += 5;
+        OnLevelUpEvent?.Invoke();
     }
 }

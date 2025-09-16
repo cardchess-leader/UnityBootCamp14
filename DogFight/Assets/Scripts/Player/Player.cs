@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Set the player ability stat here below
+
+
     [NonSerialized] public bool isInvincible;
     [NonSerialized] public bool isStealthMode;
     [NonSerialized] public bool isSprintMode;

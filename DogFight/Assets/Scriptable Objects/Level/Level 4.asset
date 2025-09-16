@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   level: 4
-  expToNextLevel: 2000
+  expToNextLevel: 400
+  enemyPrefabList:
+  - {fileID: 6872361449544733044, guid: 13efedaf842fa1c4da56fa6590ac850b, type: 3}

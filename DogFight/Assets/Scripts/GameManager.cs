@@ -11,13 +11,15 @@ public class GameManager : MonoBehaviour
     int exp = 0;
     int level = 0;
 
+    public Level GetLevel { get => levelList[level]; }
+
     private void Awake()
     {
         // Ensure that there is only one instance of GameManager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Keep this instance across scenes
+            //DontDestroyOnLoad(gameObject); // Keep this instance across scenes
         }
         else
         {
@@ -30,6 +32,15 @@ public class GameManager : MonoBehaviour
         UIController.Instance.UpdateLevelText(level, exp, levelList[level].expToNextLevel);
     }
 
+    // Press G Key to restart the game (for testing purposes)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+    }
+
     public float GetAltitude(GameObject target)
     {
         return target.transform.position.y - gameObject.transform.position.y;
@@ -40,10 +51,16 @@ public class GameManager : MonoBehaviour
         exp += amount;
         if (exp >= levelList[level].expToNextLevel && level < levelList.Count - 1)
         {
-            exp -= levelList[level].expToNextLevel;
-            level++;
+            OnLevelUp();
         }
         UIController.Instance.UpdateLevelText(level, exp, levelList[level].expToNextLevel);
+    }
+
+    public void OnLevelUp()
+    {
+        exp -= levelList[level].expToNextLevel;
+        level++;
+        Upgrade.Instance.OnLevelUp();
     }
 }
 
@@ -114,3 +131,5 @@ public class GameManager : MonoBehaviour
 // Bullet disappearing too soon 
 // Rear view camera not working (Fixed)
 // Nuke cannot be seen
+
+// Refactor so that upgrade uses delegate/event hook system

@@ -1298,6 +1298,7 @@ GameObject:
   - component: {fileID: 4813388088364007525}
   - component: {fileID: 8833140351170116907}
   - component: {fileID: 4979087955836517942}
+  - component: {fileID: 6291846322515019120}
   m_Layer: 7
   m_Name: Player Paper Plane
   m_TagString: Player
@@ -1513,13 +1514,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fd62c9e44dfdc488b28a39bb6ccc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  povCamera: {fileID: 4698236898344640691}
   maxYaw: 30
   maxPitch: 15
   rollFromMouse: 0
   smoothTime: 0.08
   deadzone: 0.03
   clampRadius: 1
+--- !u!114 &6291846322515019120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460416537014644176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8784a7d219eb4e843a864a6249427eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnLevelUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  remainingPoints: 0
 --- !u!1 &7464124297986652753
 GameObject:
   m_ObjectHideFlags: 0

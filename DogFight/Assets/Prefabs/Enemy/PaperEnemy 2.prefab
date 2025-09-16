@@ -55,7 +55,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49e192b58ab530949871106971e13456, type: 2}
+  - {fileID: 2100000, guid: 948d90ac7212c6f4a96c59edd77d08d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,7 +80,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -5538220705945243834, guid: 855e138e294cccd41b0157d2af3e9084, type: 3}
+  m_Mesh: {fileID: -4860196792993622228, guid: f2290820717ae9742a2e29a44adb2da7, type: 3}
   m_Bones:
   - {fileID: 6825121005021074477}
   - {fileID: 4054226064945089806}
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 8031322895735765150}
   - component: {fileID: 9069119379664818228}
   m_Layer: 0
-  m_Name: PaperEnemy 1
+  m_Name: PaperEnemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -828,10 +828,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b30aba286915f9419481a35574cace3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotationSpeed: 2
+  speed: 20
+  rotationSpeed: 20
   explosionEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  experiencePoints: 10
+  experiencePoints: 50
   aimTarget: {fileID: 1412076414463394411}
   _renderer: {fileID: 5334230240964389040}
 --- !u!114 &9069119379664818228
@@ -847,8 +847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
-  range: 200
-  shootCooldown: 1
+  range: 500
+  shootCooldown: 0.5
 --- !u!1 &7960784412065994708
 GameObject:
   m_ObjectHideFlags: 0

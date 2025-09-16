@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd1406a10e09b9b47b449cb449075e72, type: 3}
-  m_Name: Level 2
+  m_Name: Level 8
   m_EditorClassIdentifier: 
-  level: 2
-  expToNextLevel: 300
+  level: 8
+  expToNextLevel: 800
   enemyPrefabList:
-  - {fileID: 6872361449544733044, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
-  - {fileID: 6872361449544733044, guid: 13efedaf842fa1c4da56fa6590ac850b, type: 3}
   - {fileID: 6872361449544733044, guid: 13efedaf842fa1c4da56fa6590ac850b, type: 3}

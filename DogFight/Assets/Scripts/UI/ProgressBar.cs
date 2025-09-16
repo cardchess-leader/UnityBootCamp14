@@ -4,13 +4,10 @@ using TMPro;
 
 public class ProgressBar : MonoBehaviour
 {
-    [SerializeField]
-    int minValue = 0;
+    public int minValue = 0;
+    public int maxValue = 10;
 
-    [SerializeField]
-    int maxValue = 10;
-
-    int currentValue = 0;
+    public int currentValue = 0;
 
     [SerializeField]
     float spacing = 10;

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemy
@@ -14,7 +15,7 @@ namespace Enemy
         [SerializeField]
         Vector3 maxXYZ;
         [SerializeField]
-        GameObject GameObject;
+        List<GameObject> enemyPrefabList;
         [SerializeField]
         float spawnInterval = 2f; // Spawn new enemy every 2 seconds
         float timeSinceLastSpawn = 0f;
@@ -54,7 +55,8 @@ namespace Enemy
                 float z = Random.Range(minXYZ.z, maxXYZ.z);
                 Vector3 spawnPosition = new Vector3(x, y, z);
                 // Instantiate a new enemy at the random position with no rotation
-                Instantiate(GameObject, spawnPosition, Quaternion.identity);
+                var enemyPrefabList = GameManager.Instance.GetLevel.enemyPrefabList;
+                Instantiate(enemyPrefabList[Random.Range(0, enemyPrefabList.Count)], spawnPosition, Quaternion.identity);
             }
         }
 

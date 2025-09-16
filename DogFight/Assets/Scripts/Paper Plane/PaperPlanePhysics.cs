@@ -4,6 +4,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PaperPlanePhysics : BasePlaneController
 {
+    // Make this singleton so that it can be accessed from other scripts
+    public static PaperPlanePhysics Instance { get; private set; }
+
+    private void Awake()
+    {
+
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private int rollTapIndex;
     private float rollTapTimer;
 
