@@ -8,22 +8,27 @@ public class UpgradeUI : MonoBehaviour
 
     private void Start()
     {
-        Upgrade.Instance.OnLevelUpUIEvent.AddListener(UpdateProgressBars);
+        Upgrade.Instance.OnStatUpdateEvent.AddListener(UpdateProgressBars);
     }
 
     public void OnUpgrade(UpgradeType upgradeType)
     {
         Upgrade.Instance.SpendPoints(upgradeType);
-        //UpdateProgressBars();
     }
 
     void UpdateProgressBars(UpgradeStat upgradeStat)
     {
-        bool remainingPointsExist = Upgrade.Instance.RemainingPointsExist();
-        foreach (UpgradeRow row in upgradeRows)
+        int remaingStatPoint = Upgrade.Instance.remainingStatPoints;
+        for (int i = 0; i < 4; i++)
         {
-            int statValue = upgradeStat.GetStat(row.upgradeType);
-            row.SetProgressValue(statValue, remainingPointsExist);
+            var row = upgradeRows[i];
+            int statValue = upgradeStat.GetStat((UpgradeType)i);
+            int maxValue = upgradeStat.GetMaxStat((UpgradeType)i);
+            row.UpdateProgressBar(statValue, maxValue);
+            if (remaingStatPoint == 0)
+            {
+                row.DisableButton();
+            }
         }
     }
 }

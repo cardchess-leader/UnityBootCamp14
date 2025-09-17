@@ -20,7 +20,7 @@ public class PaperPlanePhysics : BasePlaneController
 
         rollTapTimer = rollInputTapBufferTime;
 
-        Upgrade.Instance.OnLevelUpEvent.AddListener(UpdateSpeed);
+        //Upgrade.Instance.OnLevelUpEvent.AddListener(UpdateSpeed);
     }
 
     void UpdateSpeed(UpgradeStat upgradeStat, PlayerStat playerStat)

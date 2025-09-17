@@ -20,20 +20,17 @@ public class UpgradeRow : MonoBehaviour
 
     void OnUpgradeButtonClick()
     {
-        progressBar.Value++;
         upgradeUI.OnUpgrade(upgradeType);
     }
 
-    public void SetProgressValue(int value, bool btnActive)
+    public void UpdateProgressBar(int value, int maxValue)
     {
         progressBar.Value = value;
-        if (progressBar.Value == progressBar.maxValue || !btnActive)
-        {
-            upgradeBtn.interactable = false;
-        }
-        else
-        {
-            upgradeBtn.interactable = true;
-        }
+        upgradeBtn.interactable = value != maxValue;
+    }
+
+    public void DisableButton()
+    {
+        upgradeBtn.interactable = false;
     }
 }

@@ -55,7 +55,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 948d90ac7212c6f4a96c59edd77d08d3, type: 2}
+  - {fileID: 2100000, guid: 3d76d9ce374defc40b9b5a6868707267, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 8031322895735765150}
   - component: {fileID: 9069119379664818228}
   m_Layer: 0
-  m_Name: PaperEnemy 2
+  m_Name: PaperEnemy 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -761,7 +761,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5363068692801686751}
@@ -828,10 +828,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b30aba286915f9419481a35574cace3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 5
   rotationSpeed: 20
   explosionEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  experiencePoints: 50
+  experiencePoints: 100
   aimTarget: {fileID: 1412076414463394411}
   _renderer: {fileID: 5334230240964389040}
 --- !u!114 &9069119379664818228
@@ -847,8 +847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
-  range: 500
-  shootCooldown: 0.5
+  range: 1000
+  shootCooldown: 1
 --- !u!1 &7960784412065994708
 GameObject:
   m_ObjectHideFlags: 0

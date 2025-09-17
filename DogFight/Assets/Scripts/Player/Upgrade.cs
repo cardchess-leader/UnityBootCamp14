@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,11 +16,14 @@ public class UpgradeStat
     public int Speed;
     public int Attack;
     public int Ammo;
-
+    public int MaxArmor = 10;
+    public int MaxSpeed = 10;
+    public int MaxAttack = 10;
+    public int MaxAmmo = 10;
 
     public int GetStat(UpgradeType type)
     {
-        switch(type)
+        switch (type)
         {
             case UpgradeType.Armor: return Armor;
             case UpgradeType.Speed: return Speed;
@@ -29,14 +33,14 @@ public class UpgradeStat
         }
     }
 
-    public void IncrementUpgradeStat(UpgradeType type)
-    {
+    public int GetMaxStat(UpgradeType type) {
         switch (type)
         {
-            case UpgradeType.Armor: Armor++; break;
-            case UpgradeType.Speed: Speed++; break;
-            case UpgradeType.Attack: Attack++; break;
-            case UpgradeType.Ammo: Ammo++; break;
+            case UpgradeType.Armor: return MaxArmor;
+            case UpgradeType.Speed: return MaxSpeed;
+            case UpgradeType.Attack: return MaxAttack;
+            case UpgradeType.Ammo: return MaxAmmo;
+            default: return 0;
         }
     }
 }
@@ -45,19 +49,10 @@ public class Upgrade : MonoBehaviour
 {
     // Singleton instance
     public static Upgrade Instance { get; private set; }
-
     UpgradeStat upgradeStat = new UpgradeStat();
-    [SerializeField] PlayerStat playerStat;
-    int remainingPoints = 0;
-
-    public UnityEvent<UpgradeStat, PlayerStat> OnLevelUpEvent;
-    public UnityEvent<UpgradeStat> OnLevelUpUIEvent;
-    public UnityEvent<int>OnStatPointSpentEvent;
-
-    public int GetStat(UpgradeType key)
-    {
-        return upgradeStat.GetStat(key);
-    }
+    public UnityEvent<UpgradeStat> OnStatUpdateEvent;
+    //public UnityEvent<int> OnRemaingStatPointUpdateEvent;
+    public int remainingStatPoints = 0;
 
     private void Awake()
     {
@@ -72,19 +67,40 @@ public class Upgrade : MonoBehaviour
         }
     }
 
-    public bool RemainingPointsExist() => remainingPoints > 0;
+    private void Start()
+    {
+        StartCoroutine(InitCoroutine());
+    }
+
+    IEnumerator InitCoroutine()
+    {
+        yield return null;
+        //OnRemaingStatPointUpdateEvent?.Invoke(remainingStatPoints);
+        OnStatUpdateEvent?.Invoke(upgradeStat);
+    }
+
+    public void IncrementUpgradeStat(UpgradeType type)
+    {
+        switch (type)
+        {
+            case UpgradeType.Armor: upgradeStat.Armor++; break;
+            case UpgradeType.Speed: upgradeStat.Speed++; break;
+            case UpgradeType.Attack: upgradeStat.Attack++; break;
+            case UpgradeType.Ammo: upgradeStat.Ammo++; break;
+        }
+    }
 
     public void SpendPoints(UpgradeType key)
     {
-        upgradeStat.IncrementUpgradeStat(key);
-        remainingPoints--;
-        OnStatPointSpentEvent?.Invoke(remainingPoints);
+        IncrementUpgradeStat(key);
+        remainingStatPoints--;
+        OnStatUpdateEvent?.Invoke(upgradeStat);
+        //OnRemaingStatPointUpdateEvent?.Invoke(remainingStatPoints);
     }
 
     public void OnLevelUp()
     {
-        remainingPoints += 5;
-        OnLevelUpEvent?.Invoke(upgradeStat, playerStat);
-        OnLevelUpUIEvent?.Invoke(upgradeStat);
+        remainingStatPoints += 5;
+        OnStatUpdateEvent?.Invoke(upgradeStat);
     }
 }
