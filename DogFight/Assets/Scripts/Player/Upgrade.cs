@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,29 +9,54 @@ public enum UpgradeType
     Ammo
 }
 
+public class UpgradeStat
+{
+    public int Armor;
+    public int Speed;
+    public int Attack;
+    public int Ammo;
+
+
+    public int GetStat(UpgradeType type)
+    {
+        switch(type)
+        {
+            case UpgradeType.Armor: return Armor;
+            case UpgradeType.Speed: return Speed;
+            case UpgradeType.Attack: return Attack;
+            case UpgradeType.Ammo: return Ammo;
+            default: return 0;
+        }
+    }
+
+    public void IncrementUpgradeStat(UpgradeType type)
+    {
+        switch (type)
+        {
+            case UpgradeType.Armor: Armor++; break;
+            case UpgradeType.Speed: Speed++; break;
+            case UpgradeType.Attack: Attack++; break;
+            case UpgradeType.Ammo: Ammo++; break;
+        }
+    }
+}
+
 public class Upgrade : MonoBehaviour
 {
     // Singleton instance
     public static Upgrade Instance { get; private set; }
 
-    Dictionary<UpgradeType, int> upgradeStats = new Dictionary<UpgradeType, int>()
-    {
-        {UpgradeType.Armor, 0},
-        {UpgradeType.Speed, 0},
-        {UpgradeType.Attack, 0},
-        {UpgradeType.Ammo, 0},
-    };
+    UpgradeStat upgradeStat = new UpgradeStat();
+    [SerializeField] PlayerStat playerStat;
+    int remainingPoints = 0;
 
-    // Add unity event for OnLevelUp
-    public UnityEvent OnLevelUpEvent;
+    public UnityEvent<UpgradeStat, PlayerStat> OnLevelUpEvent;
+    public UnityEvent<UpgradeStat> OnLevelUpUIEvent;
+    public UnityEvent<int>OnStatPointSpentEvent;
 
     public int GetStat(UpgradeType key)
     {
-        if (upgradeStats.ContainsKey(key))
-        {
-            return upgradeStats[key];
-        }
-        return 0;
+        return upgradeStat.GetStat(key);
     }
 
     private void Awake()
@@ -48,24 +72,19 @@ public class Upgrade : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    int remainingPoints = 5;
-
     public bool RemainingPointsExist() => remainingPoints > 0;
 
     public void SpendPoints(UpgradeType key)
     {
-        // increment the stat with the given key
-        if (upgradeStats.ContainsKey(key))
-        {
-            upgradeStats[key]++;
-            remainingPoints--;
-        }
+        upgradeStat.IncrementUpgradeStat(key);
+        remainingPoints--;
+        OnStatPointSpentEvent?.Invoke(remainingPoints);
     }
 
     public void OnLevelUp()
     {
         remainingPoints += 5;
-        OnLevelUpEvent?.Invoke();
+        OnLevelUpEvent?.Invoke(upgradeStat, playerStat);
+        OnLevelUpUIEvent?.Invoke(upgradeStat);
     }
 }

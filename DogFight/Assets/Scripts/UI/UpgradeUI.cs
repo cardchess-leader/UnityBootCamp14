@@ -8,34 +8,22 @@ public class UpgradeUI : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(InitCoroutine());
-        Upgrade.Instance.OnLevelUpEvent.AddListener(() =>
-        {
-            UpdateProgressBars();
-        });
+        Upgrade.Instance.OnLevelUpUIEvent.AddListener(UpdateProgressBars);
     }
 
     public void OnUpgrade(UpgradeType upgradeType)
     {
         Upgrade.Instance.SpendPoints(upgradeType);
-        UpdateProgressBars();
+        //UpdateProgressBars();
     }
 
-    void UpdateProgressBars()
+    void UpdateProgressBars(UpgradeStat upgradeStat)
     {
-        Debug.Log("UpdateProgressBars called");
         bool remainingPointsExist = Upgrade.Instance.RemainingPointsExist();
         foreach (UpgradeRow row in upgradeRows)
         {
-            int statValue = Upgrade.Instance.GetStat(row.upgradeType);
+            int statValue = upgradeStat.GetStat(row.upgradeType);
             row.SetProgressValue(statValue, remainingPointsExist);
         }
-    }
-
-    IEnumerator InitCoroutine()
-    {
-        // Wait until the end of frame to ensure all other Start methods have been called
-        yield return null;
-        UpdateProgressBars();
     }
 }

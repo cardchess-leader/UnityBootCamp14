@@ -16,10 +16,10 @@ public class BasePlaneController : MonoBehaviour
     [SerializeField][Range(1f, 5f)] private float stallDragMultiplier = 3f;
 
     // -------------------- THRUST --------------------
-    [Header("Thrust")][SerializeField] private float baseThrust = 20f;
-    [SerializeField] private float boostMultiplier = 1.5f;
-    [SerializeField] private float maxSpeed = 150f;
-    [SerializeField] private float boostSpeedMultiplier = 1.2f;
+    [Header("Thrust")][SerializeField] protected float baseThrust = 20f;
+    [SerializeField] protected float boostMultiplier = 1.5f;
+    [SerializeField] protected float maxSpeed = 150f;
+    [SerializeField] protected float boostSpeedMultiplier = 1.2f;
     [SerializeField] protected bool enableLateralForce = false;
     [SerializeField][Range(0f, 100f)] protected float lateralForceAmount = 15f;
 

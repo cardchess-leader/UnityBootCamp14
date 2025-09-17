@@ -4,23 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PaperPlanePhysics : BasePlaneController
 {
-    // Make this singleton so that it can be accessed from other scripts
-    public static PaperPlanePhysics Instance { get; private set; }
-
-    private void Awake()
-    {
-
-
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
     private int rollTapIndex;
     private float rollTapTimer;
 
@@ -29,7 +12,6 @@ public class PaperPlanePhysics : BasePlaneController
 
     private bool performingRollRoutine;
 
-
     protected override void Start()
     {
         base.Start();
@@ -37,6 +19,16 @@ public class PaperPlanePhysics : BasePlaneController
         initialRot = transform.rotation;
 
         rollTapTimer = rollInputTapBufferTime;
+
+        Upgrade.Instance.OnLevelUpEvent.AddListener(UpdateSpeed);
+    }
+
+    void UpdateSpeed(UpgradeStat upgradeStat, PlayerStat playerStat)
+    {
+        baseThrust = playerStat.baseThrust * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
+        boostMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
+        maxSpeed = playerStat.maxSpeed * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
+        boostSpeedMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
     }
 
     protected override void Update()
