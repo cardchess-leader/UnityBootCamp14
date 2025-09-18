@@ -92,6 +92,7 @@ public class Upgrade : MonoBehaviour
 
     public void SpendPoints(UpgradeType key)
     {
+        Debug.Log("SpendPoints: " + key);
         IncrementUpgradeStat(key);
         remainingStatPoints--;
         OnStatUpdateEvent?.Invoke(upgradeStat);

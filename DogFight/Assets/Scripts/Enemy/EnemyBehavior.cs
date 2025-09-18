@@ -73,7 +73,7 @@ namespace Enemy
             // --- Movement Logic ---
             // Rotate to face the player using the cached transform.
             Vector3 direction = (_playerTransform.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            Quaternion lookRotation = Quaternion.LookRotation(direction); // The target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 
             // Move forward constantly.

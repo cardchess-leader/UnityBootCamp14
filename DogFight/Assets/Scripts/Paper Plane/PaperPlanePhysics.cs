@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PaperPlanePhysics : BasePlaneController
 {
+    [SerializeField]
+    PlayerStat playerStat;
+
     private int rollTapIndex;
     private float rollTapTimer;
 
@@ -20,15 +23,18 @@ public class PaperPlanePhysics : BasePlaneController
 
         rollTapTimer = rollInputTapBufferTime;
 
-        //Upgrade.Instance.OnLevelUpEvent.AddListener(UpdateSpeed);
+        Upgrade.Instance.OnStatUpdateEvent.AddListener(UpdateSpeed);
     }
 
-    void UpdateSpeed(UpgradeStat upgradeStat, PlayerStat playerStat)
+    void UpdateSpeed(UpgradeStat upgradeStat)
     {
+        Debug.Log("Update Speed");
+        Debug.Log("upgradeStat.Speed: " + upgradeStat.Speed);
         baseThrust = playerStat.baseThrust * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
         boostMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
         maxSpeed = playerStat.maxSpeed * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
         boostSpeedMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
+        Debug.Log($"New Speed: {baseThrust}, {boostMultiplier}, {maxSpeed}, {boostSpeedMultiplier}");
     }
 
     protected override void Update()

@@ -4077,7 +4077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9139096701681396100, guid: c65738ceef9384d4c899c255896e5078, type: 3}
       propertyPath: m_text
-      value: 'Armor: '
+      value: 'Attack: '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17302,7 +17302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9139096701681396100, guid: c65738ceef9384d4c899c255896e5078, type: 3}
       propertyPath: m_text
-      value: 'Attack: '
+      value: 'Speed: '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24716,6 +24716,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9139096701681396100, guid: c65738ceef9384d4c899c255896e5078, type: 3}
+      propertyPath: m_text
+      value: 'Armor:'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25637,6 +25641,10 @@ PrefabInstance:
       propertyPath: rollSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: playerStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 12bd9012f97b87c45be4ec1ea665e7fa, type: 2}
     - target: {fileID: 2707393604343697624, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       propertyPath: enableTapRoll
       value: 1
