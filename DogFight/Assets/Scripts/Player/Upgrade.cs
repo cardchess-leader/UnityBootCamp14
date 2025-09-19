@@ -51,7 +51,6 @@ public class Upgrade : MonoBehaviour
     public static Upgrade Instance { get; private set; }
     UpgradeStat upgradeStat = new UpgradeStat();
     public UnityEvent<UpgradeStat> OnStatUpdateEvent;
-    //public UnityEvent<int> OnRemaingStatPointUpdateEvent;
     public int remainingStatPoints = 0;
 
     private void Awake()
@@ -75,7 +74,6 @@ public class Upgrade : MonoBehaviour
     IEnumerator InitCoroutine()
     {
         yield return null;
-        //OnRemaingStatPointUpdateEvent?.Invoke(remainingStatPoints);
         OnStatUpdateEvent?.Invoke(upgradeStat);
     }
 
@@ -92,11 +90,11 @@ public class Upgrade : MonoBehaviour
 
     public void SpendPoints(UpgradeType key)
     {
-        Debug.Log("SpendPoints: " + key);
+        if (remainingStatPoints <= 0) return;
+        if (upgradeStat.GetStat(key) >= upgradeStat.GetMaxStat(key)) return;
         IncrementUpgradeStat(key);
         remainingStatPoints--;
         OnStatUpdateEvent?.Invoke(upgradeStat);
-        //OnRemaingStatPointUpdateEvent?.Invoke(remainingStatPoints);
     }
 
     public void OnLevelUp()

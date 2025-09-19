@@ -28,13 +28,9 @@ public class PaperPlanePhysics : BasePlaneController
 
     void UpdateSpeed(UpgradeStat upgradeStat)
     {
-        Debug.Log("Update Speed");
-        Debug.Log("upgradeStat.Speed: " + upgradeStat.Speed);
         baseThrust = playerStat.baseThrust * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
-        boostMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
         maxSpeed = playerStat.maxSpeed * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
         boostSpeedMultiplier = playerStat.boostMultiplier * Mathf.Pow(playerStat.statUpgradeMultiplier, upgradeStat.Speed);
-        Debug.Log($"New Speed: {baseThrust}, {boostMultiplier}, {maxSpeed}, {boostSpeedMultiplier}");
     }
 
     protected override void Update()

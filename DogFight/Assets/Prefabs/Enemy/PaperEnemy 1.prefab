@@ -744,6 +744,7 @@ GameObject:
   - component: {fileID: 8256139800985303711}
   - component: {fileID: 8031322895735765150}
   - component: {fileID: 9069119379664818228}
+  - component: {fileID: 695717623615919914}
   m_Layer: 0
   m_Name: PaperEnemy 1
   m_TagString: Untagged
@@ -828,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b30aba286915f9419481a35574cace3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 10
   rotationSpeed: 3600
   explosionEffect: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   experiencePoints: 35
@@ -849,6 +850,20 @@ MonoBehaviour:
   bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
   range: 200
   shootCooldown: 1
+--- !u!114 &695717623615919914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872361449544733044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35fd54ac079a8b47aa6549789157333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconPrefab: {fileID: 3175715734412755859, guid: 0187655b15a3b6c4e93891f32c5d53c3, type: 3}
+  clampOnRadar: 1
 --- !u!1 &7960784412065994708
 GameObject:
   m_ObjectHideFlags: 0

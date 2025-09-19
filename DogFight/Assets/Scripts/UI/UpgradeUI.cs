@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class UpgradeUI : MonoBehaviour
@@ -9,6 +8,22 @@ public class UpgradeUI : MonoBehaviour
     private void Start()
     {
         Upgrade.Instance.OnStatUpdateEvent.AddListener(UpdateProgressBars);
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            string input = Input.inputString;
+            if (input.Length > 0)
+            {
+                var numKey = input[0] - '1';
+                if (numKey >= 0 && numKey < 4)
+                {
+                    OnUpgrade((UpgradeType)(numKey));
+                }
+            }
+        }
     }
 
     public void OnUpgrade(UpgradeType upgradeType)

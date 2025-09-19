@@ -76,6 +76,7 @@ namespace Enemy
             Quaternion lookRotation = Quaternion.LookRotation(direction); // The target rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 
+
             // Move forward constantly.
             transform.position += transform.forward * Time.deltaTime * speed;
         }
