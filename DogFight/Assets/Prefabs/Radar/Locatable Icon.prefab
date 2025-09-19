@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2866505104195728684}
-  - component: {fileID: 3175715734412755859}
   - component: {fileID: 1796323759375336341}
   - component: {fileID: 2648520283950036538}
   - component: {fileID: 526385390742586926}
+  - component: {fileID: 1022248094250266411}
   m_Layer: 0
   m_Name: Locatable Icon
   m_TagString: Untagged
@@ -39,18 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3175715734412755859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2391378085789850536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4caa9f9d71ad1a24fa3cb97603bf4d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1796323759375336341
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -101,3 +89,15 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1022248094250266411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2391378085789850536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0af59f692fce84885b52f27ec850c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

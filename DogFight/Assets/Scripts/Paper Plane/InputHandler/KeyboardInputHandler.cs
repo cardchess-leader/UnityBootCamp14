@@ -10,6 +10,8 @@ public class KeyboardInputHandler : BaseInputHandler
     [SerializeField] private KeyCode thrustKeyRight = KeyCode.E;
     [SerializeField] private KeyCode povToggleKey = KeyCode.Tab;
 
+    [SerializeField] private KeyCode brakeKey = KeyCode.F;
+
     // 더블 클릭 감지를 위한 변수들
     [SerializeField] private float doubleClickTime = 0.3f; // 더블 클릭 간격 (초)
     
@@ -35,6 +37,7 @@ public class KeyboardInputHandler : BaseInputHandler
 
     public override bool IsLeftThrustDown { get; set; }
     public override bool BackFlipInput { get; set; }
+    public override bool IsBraking { get; set; }
     public override void UpdateInputs()
     {
         ControlInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -77,8 +80,7 @@ public class KeyboardInputHandler : BaseInputHandler
 
         IsBoosting = Input.GetKey(boostKey);
 
-        BackFlipInput = Input.GetKeyDown(KeyCode.F);
-        
+        IsBraking = Input.GetKey(brakeKey);
         // 현재 프레임의 수평 입력을 다음 프레임을 위해 저장
         prevHorizontalInput = Input.GetAxisRaw("Horizontal");
     }

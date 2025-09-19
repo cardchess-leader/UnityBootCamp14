@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 8256139800985303711}
   - component: {fileID: 8031322895735765150}
   - component: {fileID: 9069119379664818228}
-  - component: {fileID: -2913537820504105662}
+  - component: {fileID: -1239782821478485967}
   m_Layer: 0
   m_Name: PaperEnemy 2
   m_TagString: Untagged
@@ -850,7 +850,7 @@ MonoBehaviour:
   bullet: {fileID: 3111918664913441090, guid: e43dd650b426b8b40bd2c461f98d6618, type: 3}
   range: 500
   shootCooldown: 0.5
---- !u!114 &-2913537820504105662
+--- !u!114 &-1239782821478485967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -859,10 +859,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6872361449544733044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a35fd54ac079a8b47aa6549789157333, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e77770299c3bf64ab1a8a064afbcd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconPrefab: {fileID: 3175715734412755859, guid: 0187655b15a3b6c4e93891f32c5d53c3, type: 3}
+  iconPrefab: {fileID: 1022248094250266411, guid: 0187655b15a3b6c4e93891f32c5d53c3, type: 3}
   clampOnRadar: 1
 --- !u!1 &7960784412065994708
 GameObject:

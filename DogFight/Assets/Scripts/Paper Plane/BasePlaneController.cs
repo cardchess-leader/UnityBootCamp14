@@ -29,6 +29,9 @@ public class BasePlaneController : MonoBehaviour
     [SerializeField] protected float rollSpeed = 500f;
     [SerializeField] private float maxPitchAngle = 40f;
 
+    // -------------------- Brake --------------------
+    [Header("Brake")][SerializeField] private float brakePower = 1f;
+
     // -------------------- VISUALS --------------------
     [Header("Visuals")][SerializeField] private Transform planeModel;
     [SerializeField] private TrailRenderer[] trails;
@@ -132,6 +135,8 @@ public class BasePlaneController : MonoBehaviour
 
     private const float VelocityThreshold = 0.1f;
 
+    private float linearDamping;
+
     // -------------------- PUBLIC ACCESSORS --------------------
     public Rigidbody Rigidbody => _rigidbody;
     public float YawInput => _controlInput.x;
@@ -153,6 +158,7 @@ public class BasePlaneController : MonoBehaviour
     protected virtual void Start()
     {
         _rigidbody.linearVelocity = transform.forward * 15f;
+        linearDamping = _rigidbody.linearDamping;
     }
 
     protected virtual void Update()
@@ -180,6 +186,7 @@ public class BasePlaneController : MonoBehaviour
         ApplyAerodynamicForces();
         ApplyThrust();
         UpdateRotation();
+        ApplyBrake();
     }
 
 
@@ -238,6 +245,22 @@ public class BasePlaneController : MonoBehaviour
         if (_rigidbody.linearVelocity.magnitude > _currentMaxSpeed)
         {
             _rigidbody.linearVelocity = _rigidbody.linearVelocity.normalized * _currentMaxSpeed;
+        }
+    }
+
+    private void ApplyBrake()
+    {
+        if (inputHandler.IsBraking)
+        {
+            Debug.Log("Braking");
+            _rigidbody.linearDamping = linearDamping + brakePower;
+            Time.timeScale = 0.25f;
+        } 
+        else
+        {
+            Debug.Log("Not Braking");
+            _rigidbody.linearDamping = linearDamping;
+            Time.timeScale = 1f;
         }
     }
 

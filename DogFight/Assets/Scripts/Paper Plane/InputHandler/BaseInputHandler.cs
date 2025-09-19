@@ -13,4 +13,6 @@ public abstract class BaseInputHandler : MonoBehaviour
 
     public abstract bool IsRollInputDown { get; set; }
     public abstract int RollDirection { get; set; }
+
+    public abstract bool IsBraking { get; set; }
 }

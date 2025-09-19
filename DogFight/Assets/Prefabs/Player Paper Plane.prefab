@@ -1444,6 +1444,7 @@ MonoBehaviour:
   backFlipDuration: 1
   upwardsForce: 10
   backFlipTorque: 2
+  playerStat: {fileID: 0}
 --- !u!114 &992489015702451463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,6 +1463,7 @@ MonoBehaviour:
   thrustKeyLeft: 113
   thrustKeyRight: 101
   povToggleKey: 9
+  brakeKey: 273
   doubleClickTime: 0.3
 --- !u!114 &7568630854785393792
 MonoBehaviour:
@@ -1532,10 +1534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8784a7d219eb4e843a864a6249427eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnLevelUpEvent:
+  OnStatUpdateEvent:
     m_PersistentCalls:
       m_Calls: []
-  remainingPoints: 0
+  remainingStatPoints: 0
 --- !u!1 &7464124297986652753
 GameObject:
   m_ObjectHideFlags: 0
