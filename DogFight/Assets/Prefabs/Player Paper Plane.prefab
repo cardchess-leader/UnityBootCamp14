@@ -142,6 +142,333 @@ MonoBehaviour:
   maxFlutterSpeed: 5
   maxFlutterIntensity: 0.06
   inputFlutterMultiplier: 0.005
+--- !u!1 &688273955194121358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7684963602477662775}
+  - component: {fileID: 6696309819930194569}
+  - component: {fileID: 5857104418763020751}
+  - component: {fileID: 302050794578950200}
+  - component: {fileID: 3798651598214990860}
+  - component: {fileID: 7237463910499506092}
+  m_Layer: 7
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7684963602477662775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6781465880835372414}
+  m_Father: {fileID: 5771876804387304120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6696309819930194569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be22ec2888b63fe4696cfd193f90d373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCullingMasks: 0
+  head: {fileID: 7684963602477662775}
+  cam: {fileID: 7616374549921991537}
+  crosshair: {fileID: 3798651598214990860}
+  chargeBar: {fileID: 5857104418763020751}
+  ammoBar: {fileID: 302050794578950200}
+  compass: {fileID: 7237463910499506092}
+  crosshairTransform: {fileID: 6781465880835372414}
+  smoof: 0.99
+  moveSpeed: 1
+  lookSensitivity: 1
+  ammoBarAngularSpanRad: 0
+  ammoBarOutlineThickness: 0.05
+  ammoBarThickness: 0
+  ammoBarRadius: 0
+  fireSidebarRadiusPunchAmount: 0.1
+  shakeAnimX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeAnimY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5857104418763020751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1181ecea6c10a954fb22000cae5b937c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeSpeed: 1
+  chargeDecaySpeed: 1
+  tickColor: {r: 1, g: 1, b: 1, a: 1}
+  chargeFillGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  tickSizeSmol: 0.1
+  tickSizeLorge: 0.1
+  tickTickness: 0
+  fontSize: 0.1
+  fontSizeLorge: 0.1
+  percentLabelOffset: 0.1
+  fontGrowRangePrev: 0.1
+  fontGrowRangeNext: 0.1
+  chargeFillCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  animChargeShakeMagnitude:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeShakeMagnitude: 0.05
+  chargeShakeSpeed: 1
+--- !u!114 &302050794578950200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0d1002495530945944e524f753c8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalBullets: 20
+  bullets: 15
+  bulletThicknessScale: 1
+  bulletEjectScale: 0.5
+  bulletDisappearTime: 1
+  bulletEjectAngSpeed: 0.5
+  ejectRotSpeedVariance: 1
+  bulletEjectX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bulletEjectY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3798651598214990860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46af784bf4faf0f4bbee2b8e5a713dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairCrossInnerRad: 0.05
+  crosshairCrossOuterRad: 0.05
+  crosshairCrossThickness: 0.05
+  crosshairHitCrossInnerRad: 0.05
+  crosshairHitCrossOuterRad: 0.05
+  crosshairHitCrossThickness: 0.05
+  scaleFire: 0.1
+  fireDecayer:
+    decaySpeed: 0
+    magnitude: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  hitDecayer:
+    decaySpeed: 0
+    magnitude: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+--- !u!114 &7237463910499506092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688273955194121358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1431f315c5993d4d8e64935e8badfde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  width: 1
+  lineThickness: 0.01
+  bendRadius: 1
+  fieldOfView: 1.5707964
+  ticksPerQuarterTurn: 12
+  tickSize: 0.1
+  tickEdgeFadeFraction: 0.1
+  fontSizeTickLabel: 0.26
+  tickLabelOffset: 0.01
+  fontSizeLookLabel: 0.26
+  lookAngLabelOffset: {x: 0, y: 0}
+  triangleNootSize: 0.05
 --- !u!1 &1827013070837479953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1438,37 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &5266387082703144187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6781465880835372414}
+  m_Layer: 7
+  m_Name: Crosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6781465880835372414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266387082703144187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7684963602477662775}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5384163854309487603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1682,7 @@ Transform:
   - {fileID: 1842233217117581406}
   - {fileID: 5691513282659923864}
   - {fileID: 3762405084033715505}
+  - {fileID: 7684963602477662775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6247063655083277280
@@ -1413,6 +1772,7 @@ MonoBehaviour:
   pitchSpeed: 2
   rollSpeed: 100
   maxPitchAngle: 45
+  brakePower: 1
   planeModel: {fileID: 7429263376826541187}
   trails: []
   leftWing: {fileID: 7927762853955580369}

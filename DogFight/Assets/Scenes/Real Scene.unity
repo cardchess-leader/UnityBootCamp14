@@ -17941,13 +17941,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6872361449544733044, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1508077660}
+    - targetCorrespondingSourceObject: {fileID: 6872361449544733044, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1508077661}
   m_SourcePrefab: {fileID: 100100000, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
 --- !u!1 &1508077653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6872361449544733044, guid: 60d4d27449c2ac8469602b7c489b598a, type: 3}
   m_PrefabInstance: {fileID: 1508077652}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1508077660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508077653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30fa4a7b66eae647bad06aea5fe607c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCullingMasks: 1
+--- !u!114 &1508077661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508077653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c0ff691e69eeb458db477a568abdfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCullingMasks: 0
 --- !u!1001 &1523501035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26508,6 +26540,10 @@ PrefabInstance:
     - target: {fileID: 644391250801338114, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       propertyPath: usePOVComponent
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 688273955194121358, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 992489015702451463, guid: 1c6f632f69c91824bb906c02d89d22d3, type: 3}
       propertyPath: brakeKey

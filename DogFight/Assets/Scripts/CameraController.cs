@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public bool isPOVMode = false;
+    public bool isPOVMode = true;
     Camera povCamera;
     Cinemachine.CinemachineBrain cinemachineCamera;
     public Camera GetCamera()
